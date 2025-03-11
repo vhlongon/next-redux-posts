@@ -7,7 +7,6 @@ import { useAppSelector, useAppStore } from './storeHooks';
 export const useLoadPosts = (initialData: Omit<PostsState, 'currentPost'>) => {
   const store = useAppStore();
   const initialized = useRef(false);
-  const noMorePosts = useRef(false);
 
   if (!initialized.current) {
     store.dispatch(setPosts(initialData));
@@ -24,25 +23,25 @@ export const useLoadPosts = (initialData: Omit<PostsState, 'currentPost'>) => {
   const { limit, skip, posts, total } = useAppSelector(state => state.posts);
 
   useEffect(() => {
-    if (!isIntersecting || isLoading || noMorePosts.current) {
+    if (!isIntersecting || isLoading || posts.length >= total) {
       return;
     }
 
     const addPosts = async () => {
       setIsLoading(true);
       try {
-        const newPosts = await fetchPosts(limit, skip + posts.length);
-        if (newPosts.length === 0) {
-          noMorePosts.current = true;
+        const newPointer = skip + limit;
+        const data = await fetchPosts(limit, newPointer);
+        if (data.posts.length === 0) {
           return;
         }
-        const allPosts = [...posts, ...newPosts];
+        const allPosts = [...posts, ...data.posts];
         store.dispatch(
           setPosts({
             limit,
             posts: allPosts,
-            skip: skip + posts.length,
-            total: allPosts.length,
+            skip: newPointer,
+            total,
           })
         );
       } catch (error) {

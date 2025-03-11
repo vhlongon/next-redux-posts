@@ -1,4 +1,4 @@
-import { Post } from '../../components/Post';
+import { SinglePost } from '../../components/SinglePost';
 import { fetchPost } from '@/lib/api/posts';
 
 type Params = { id: string };
@@ -14,7 +14,7 @@ export default async function PostsPage({ params }: PostPageProps) {
   return (
     <>
       {postData ? (
-        <Post {...postData} />
+        <SinglePost {...postData} />
       ) : (
         <h1>No data for post with id {id}</h1>
       )}

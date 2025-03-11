@@ -13,7 +13,7 @@ export async function fetchAuthor(id: number) {
   return validateAuthor(data);
 }
 
-export async function fetchPosts(limit = 10, skip = 0) {
+export async function fetchPosts(limit = 20, skip = 0) {
   const url = new URL(`${baseUrl}/posts`);
   url.searchParams.set('limit', limit.toString());
   url.searchParams.set('skip', skip.toString());
@@ -22,7 +22,7 @@ export async function fetchPosts(limit = 10, skip = 0) {
     throw new Error('Failed to fetch posts');
   }
   const data = await response.json();
-  const posts = validatePosts(data.posts);
+  const { posts, total } = validatePosts(data);
 
   const postsWithAuthor = await Promise.all(
     posts.map(async post => {
@@ -32,7 +32,7 @@ export async function fetchPosts(limit = 10, skip = 0) {
     })
   );
 
-  return postsWithAuthor;
+  return { posts: postsWithAuthor, total };
 }
 
 export async function fetchPost(id: string) {

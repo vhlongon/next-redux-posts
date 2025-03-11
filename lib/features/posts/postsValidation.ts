@@ -10,7 +10,12 @@ export const PostSchema = z.object({
 
 export type Post = z.infer<typeof PostSchema>;
 
-export const PostsSchema = z.array(PostSchema);
+export const PostsSchema = z.object({
+  posts: z.array(PostSchema),
+  total: z.number(),
+  skip: z.number(),
+  limit: z.number(),
+});
 
 export type Posts = z.infer<typeof PostsSchema>;
 

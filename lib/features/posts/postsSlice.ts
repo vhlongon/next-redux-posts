@@ -13,7 +13,7 @@ const initialState: PostsState = {
   posts: [],
   total: 0,
   skip: 0,
-  limit: 10,
+  limit: 20,
   currentPost: null,
 };
 

@@ -14,17 +14,17 @@ export default async function PostsPage({ searchParams }: PostsPageProps) {
   const sParams = await searchParams;
   const limit = getPropFromParams(sParams, 'limit', 20);
   const skip = getPropFromParams(sParams, 'skip', 0);
-  const postsData = await fetchPosts(limit, skip);
+  const data = await fetchPosts(limit, skip);
 
   return (
     <div>
       <h1>Posts</h1>
       <PostsList
         initialData={{
-          limit: 10,
-          posts: postsData,
-          skip: 0,
-          total: postsData.length,
+          limit,
+          posts: data.posts,
+          skip,
+          total: data.total,
         }}
       />
     </div>
