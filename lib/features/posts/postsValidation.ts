@@ -8,6 +8,23 @@ export const PostSchema = z.object({
   userId: z.number(),
 });
 
+export const AuthorSchema = z.object({
+  id: z.number(),
+  firstName: z.string(),
+  lastName: z.string(),
+});
+
+export const PostWithAuthorSchema = PostSchema.extend({
+  author: AuthorSchema,
+});
+
+export const PostsWithAuthorSchema = z.object({
+  posts: z.array(PostWithAuthorSchema),
+  total: z.number(),
+  skip: z.number(),
+  limit: z.number(),
+});
+
 export const PostsSchema = z.object({
   posts: z.array(PostSchema),
   total: z.number(),
@@ -15,12 +32,8 @@ export const PostsSchema = z.object({
   limit: z.number(),
 });
 
-export const AuthorSchema = z.object({
-  id: z.number(),
-  firstName: z.string(),
-  lastName: z.string(),
-});
-
 export const validatePost = (data: unknown) => PostSchema.parse(data);
 export const validatePosts = (data: unknown) => PostsSchema.parse(data);
+export const validatePostWithAuthor = (data: unknown) =>
+  PostWithAuthorSchema.parse(data);
 export const validateAuthor = (data: unknown) => AuthorSchema.parse(data);

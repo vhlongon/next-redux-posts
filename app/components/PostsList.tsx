@@ -1,11 +1,11 @@
 'use client';
 
-import { PostsResponse } from '@/lib/features/posts/postTypes';
+import { PostsWithAuthorResponse } from '@/lib/features/posts/postTypes';
 import { useLoadInfinitePosts } from '@/lib/hooks/useLoadInfinitePosts';
 import { Post } from './Post';
 
 type PostsProps = {
-  initialData: PostsResponse;
+  initialData: PostsWithAuthorResponse;
 };
 
 export const PostsList = ({ initialData }: PostsProps) => {
@@ -25,7 +25,7 @@ export const PostsList = ({ initialData }: PostsProps) => {
                 listStyle: 'none',
               }}
             >
-              <Post {...post} shouldTruncate showLink />
+              <Post {...post} preview />
             </li>
           );
         })}

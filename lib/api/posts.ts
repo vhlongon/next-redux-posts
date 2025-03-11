@@ -32,7 +32,7 @@ export async function fetchPosts(limit = 20, skip = 0) {
     })
   );
 
-  return { posts: postsWithAuthor, total };
+  return { posts: postsWithAuthor, total, limit, skip };
 }
 
 export async function fetchPost(id: string) {

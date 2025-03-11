@@ -1,22 +1,28 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import type { PostsResponse, Post } from './postTypes';
+import type { PostsWithAuthorResponse, Post } from './postTypes';
+import { fetchPosts } from '@/lib/api/posts';
 
-type GetPostsArgs = Pick<PostsResponse, 'limit' | 'skip'>;
+type GetPostsArgs = Pick<PostsWithAuthorResponse, 'limit' | 'skip'>;
 
 export const postsApiSlice = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: 'https://dummyjson.com' }),
   reducerPath: 'postsApi',
   tagTypes: ['Posts'],
   endpoints: build => ({
-    getInfinitePosts: build.infiniteQuery<PostsResponse, GetPostsArgs, number>({
+    getInfinitePosts: build.infiniteQuery<
+      PostsWithAuthorResponse,
+      GetPostsArgs,
+      number
+    >({
       infiniteQueryOptions: {
         initialPageParam: 0,
         getNextPageParam: (lastPage, _pages) => {
           return lastPage.skip + lastPage.limit;
         },
       },
-      query: ({ queryArg: { limit }, pageParam }) => {
-        return `/posts?limit=${limit}&skip=${pageParam}`;
+      queryFn: async ({ queryArg: { limit }, pageParam }) => {
+        const response = await fetchPosts(limit, pageParam);
+        return { data: response };
       },
       providesTags: (_result, _error, { limit, skip }) => {
         return [{ type: 'Posts', id: `${limit}-${skip}` }];
