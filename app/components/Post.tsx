@@ -2,7 +2,7 @@
 
 import { setCurrentPost } from '@/lib/features/posts/postsSlice';
 import type { Post as PostType } from '@/lib/features/posts/postsValidation';
-import { useAppStore } from '@/lib/hooks';
+import { useAppStore } from '@/lib/hooks/storeHooks';
 import { useRef } from 'react';
 
 export const Post = (props: PostType) => {
