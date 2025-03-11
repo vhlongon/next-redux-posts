@@ -5,7 +5,8 @@
     "build": "next build",
     "start": "next start",
     "test": "vitest run --silent",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "typecheck": "tsc  --noEmit --project tsconfig.quality.json"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.0",
