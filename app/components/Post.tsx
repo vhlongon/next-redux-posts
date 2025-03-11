@@ -14,20 +14,17 @@ export const Post = ({
   body,
   id,
   author,
-}: PostProps) => {
-  console.log('🚀 ~ preview:', preview);
-  return (
-    <div>
-      <h1>{title}</h1>
-      <p>{preview ? truncateText(body, 100) : body}</p>
-      <p>
-        By {author.firstName} {author.lastName}
-      </p>
-      {preview && (
-        <Link style={{ display: 'block' }} href={`/post/${id}`}>
-          Read more
-        </Link>
-      )}
-    </div>
-  );
-};
+}: PostProps) => (
+  <div>
+    <h1>{title}</h1>
+    <p>{preview ? truncateText(body, 100) : body}</p>
+    <p>
+      By {author.firstName} {author.lastName}
+    </p>
+    {preview && (
+      <Link style={{ display: 'block' }} href={`/post/${id}`}>
+        Read more
+      </Link>
+    )}
+  </div>
+);
