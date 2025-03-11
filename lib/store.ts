@@ -1,8 +1,8 @@
 import { combineSlices, configureStore } from '@reduxjs/toolkit';
-import postsReducer from './features/posts/postsSlice';
+import { postsApiSlice } from './features/posts/postsApiSlice';
 
 const rootReducer = combineSlices({
-  posts: postsReducer,
+  [postsApiSlice.reducerPath]: postsApiSlice.reducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
@@ -10,6 +10,9 @@ export type RootState = ReturnType<typeof rootReducer>;
 export const makeStore = () => {
   return configureStore({
     reducer: rootReducer,
+    middleware: getDefaultMiddleware =>
+      getDefaultMiddleware().concat(postsApiSlice.middleware),
+    devTools: true,
   });
 };
 

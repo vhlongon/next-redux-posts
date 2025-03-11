@@ -9,7 +9,6 @@ export default function RootLayout({ children }: PropsWithChildren) {
       <html lang="en">
         <body>
           <section>
-            <header>header</header>
             <main>{children}</main>
           </section>
         </body>

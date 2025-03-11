@@ -8,8 +8,6 @@ export const PostSchema = z.object({
   userId: z.number(),
 });
 
-export type Post = z.infer<typeof PostSchema>;
-
 export const PostsSchema = z.object({
   posts: z.array(PostSchema),
   total: z.number(),
@@ -17,18 +15,12 @@ export const PostsSchema = z.object({
   limit: z.number(),
 });
 
-export type Posts = z.infer<typeof PostsSchema>;
-
-export const validatePost = (post: Post) => PostSchema.parse(post);
-
-export const validatePosts = (posts: Posts) => PostsSchema.parse(posts);
-
 export const AuthorSchema = z.object({
   id: z.number(),
   firstName: z.string(),
   lastName: z.string(),
 });
 
-export type Author = z.infer<typeof AuthorSchema>;
-
-export const validateAuthor = (author: Author) => AuthorSchema.parse(author);
+export const validatePost = (data: unknown) => PostSchema.parse(data);
+export const validatePosts = (data: unknown) => PostsSchema.parse(data);
+export const validateAuthor = (data: unknown) => AuthorSchema.parse(data);
