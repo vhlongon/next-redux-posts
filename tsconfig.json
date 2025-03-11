@@ -1,6 +1,12 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
     "baseUrl": ".",
     "paths": { "@/*": ["./*"] },
     "target": "ESNext",
