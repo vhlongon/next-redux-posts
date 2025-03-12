@@ -9,12 +9,11 @@ type PostsProps = {
 };
 
 const List = styled.ul`
-  margin-bottom: ${({ theme }) => theme.spacing.xxl};
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing.lg};
   max-width: 1000px;
-  margin: 0 auto;
+  margin: 0 auto ${({ theme }) => theme.spacing.xxl} auto;
   padding-left: 0;
 `;
 

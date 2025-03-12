@@ -22,7 +22,7 @@ const fadeInAndOut = keyframes`
 `;
 
 export const PostWrapper = styled.article`
-  padding: ${({ theme }) => theme.spacing.base};
+  padding: ${({ theme }) => theme.spacing.xl};
   border: ${({ theme }) =>
     `${theme.borderWidth.sm} solid ${theme.colors.neonBlue}`};
   border-radius: ${({ theme }) => theme.borderRadius.md};
