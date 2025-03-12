@@ -25,6 +25,14 @@ export const cyberpunkTheme: DefaultTheme = {
     md: 'var(--border-width-md)',
     lg: 'var(--border-width-lg)',
   },
+  spacing: {
+    xs: 'var(--spacing-xs)',
+    sm: 'var(--spacing-sm)',
+    base: 'var(--spacing-base)',
+    lg: 'var(--spacing-lg)',
+    xl: 'var(--spacing-xl)',
+    xxl: 'var(--spacing-xxl)',
+  },
   colors: {
     // Base colors
     background: 'var(--color-background)',

@@ -19,6 +19,14 @@ declare module 'styled-components' {
       md: string;
       lg: string;
     };
+    spacing: {
+      xs: string;
+      sm: string;
+      base: string;
+      lg: string;
+      xl: string;
+      xxl: string;
+    };
     colors: {
       // Base colors
       background: string;
