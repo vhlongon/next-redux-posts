@@ -204,6 +204,17 @@ p {
   box-sizing: border-box;
 }
 
+code {
+  background-color: var(--color-surface);
+  padding: var(--spacing-sm);
+  border-radius: var(--border-radius-sm);
+  font-family: var(--font-mono);
+  color: var(--color-neon-pink);
+  display: inline-block;
+  padding: var(--spacing-base);
+  border-radius: var(--border-radius-sm);
+}
+
 .app-heading {
   text-align: center;
   font-size: 2.8rem;
