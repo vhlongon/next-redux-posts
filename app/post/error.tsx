@@ -9,7 +9,7 @@ type ErrorProps = {
   };
 };
 
-export default function Error({ error }: ErrorProps) {
+export default function PostError({ error }: ErrorProps) {
   const { id } = useParams();
 
   useEffect(() => {
@@ -19,10 +19,14 @@ export default function Error({ error }: ErrorProps) {
   }, [error]);
 
   return (
-    <div>
-      <h1>Something went wrong!</h1>'
-      <h2>trying to fetch the post for id {id}</h2>
-      <p>Error: {error.message}</p>
+    <div style={{ textAlign: 'center', padding: 'var(--spacing-xl)' }}>
+      <h2>Something went wrong!</h2>
+      <p>
+        Error trying to fetch the post for id: <em>{id}</em>
+      </p>
+      <code>
+        <pre>{error.message}</pre>
+      </code>
     </div>
   );
 }
