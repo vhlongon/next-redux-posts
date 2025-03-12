@@ -5,7 +5,7 @@ import type {
   PostWithAuthor,
 } from './postTypes';
 import { fetchPosts } from '@/lib/api/posts';
-
+import { getClient } from '@/lib/socket/client';
 type GetPostsArgs = Pick<PostsWithAuthorResponse, 'limit' | 'skip'>;
 
 export const postsApiSlice = createApi({
@@ -29,11 +29,7 @@ export const postsApiSlice = createApi({
         { cacheDataLoaded, cacheEntryRemoved, dispatch }
       ) {
         console.log('Attempting to establish WebSocket connection...', { arg });
-
-        const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-        const url = `${protocol}//${window.location.host}/api/ws`;
-
-        const ws = new WebSocket(url);
+        const ws = getClient();
 
         try {
           await cacheDataLoaded;

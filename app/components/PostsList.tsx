@@ -2,8 +2,9 @@
 
 import { PostsWithAuthorResponse } from '@/lib/features/posts/postTypes';
 import { useLoadInfinitePosts } from '@/lib/hooks/useLoadInfinitePosts';
-import { Post } from './Post';
+import { getClient } from '@/lib/socket/client';
 import type { MouseEventHandler } from 'react';
+import { Post } from './Post';
 
 type PostsProps = {
   initialData: PostsWithAuthorResponse;
@@ -18,11 +19,9 @@ export const PostsList = ({ initialData }: PostsProps) => {
     e.preventDefault();
     //TODO: move this to a hook
     // Send a test post through the WebSocket
-    const ws = new WebSocket(
-      `${window.location.protocol === 'https:' ? 'wss:' : 'ws:'}//${
-        window.location.host
-      }/api/ws`
-    );
+
+    const ws = getClient();
+
     ws.onopen = () => {
       const newPost = {
         id: Date.now(), // Use timestamp to ensure unique ID

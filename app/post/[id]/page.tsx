@@ -7,7 +7,7 @@ type PostPageProps = {
   params: Params;
 };
 
-export default async function PostsPage({ params }: PostPageProps) {
+export default async function PostPage({ params }: PostPageProps) {
   const { id } = await params;
   const postData = await fetchPost(id);
 
