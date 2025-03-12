@@ -1,11 +1,8 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import type {
-  PostsWithAuthorResponse,
-  Post,
-  PostWithAuthor,
-} from './postTypes';
-import { fetchPosts } from '@/lib/api/posts';
+import { fetchAuthor, fetchPost, fetchPosts } from '@/lib/api/posts';
 import { getClient } from '@/lib/socket/client';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { validatePost } from './postsValidation';
+import type { PostsWithAuthorResponse, PostWithAuthor } from './postTypes';
 type GetPostsArgs = Pick<PostsWithAuthorResponse, 'limit' | 'skip'>;
 
 export const postsApiSlice = createApi({
@@ -73,9 +70,12 @@ export const postsApiSlice = createApi({
         return [{ type: 'Posts', id: `${limit}-${skip}` }];
       },
     }),
-    getPost: build.query<Post, { id: number }>({
-      query: ({ id }) => {
-        return { url: `posts/${id}`, method: 'GET' };
+    getPost: build.query<PostWithAuthor, { id: number }>({
+      queryFn: async ({ id }) => {
+        const response = await fetchPost(String(id));
+        const post = validatePost(response);
+        const author = await fetchAuthor(post.userId);
+        return { data: { ...post, author } };
       },
       providesTags: (_result, _error, { id }) => {
         return [{ type: 'Posts', id: `${id}` }];
