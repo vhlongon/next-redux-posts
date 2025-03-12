@@ -1,4 +1,4 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { PostsList } from './components/PostsList';
 import { fetchPosts } from '@/lib/api/posts';
 import { getPropFromParams } from '@/lib/utils/params';
@@ -18,7 +18,7 @@ export default async function PostsPage({ searchParams }: PostsPageProps) {
 
   return (
     <div>
-      <h1>Posts</h1>
+      <h2 style={{ textAlign: 'center' }}>Posts</h2>
       <PostsList
         initialData={{
           limit,
