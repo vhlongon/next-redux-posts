@@ -1,6 +1,7 @@
 'use client';
 
 import type { PostWithAuthor } from '@/lib/features/posts/postTypes';
+import { compressData } from '@/lib/utils/compression';
 import Link from 'next/link';
 import styled, { keyframes } from 'styled-components';
 import Avatar from './Avatar';
@@ -75,13 +76,13 @@ const FullPostWrapper = styled.div`
 
 export const Post = ({
   preview = false,
-  title,
-  body,
-  id,
-  author,
   isNew = false,
+  ...post
 }: PostProps) => {
+  const { id, author, title, body } = post;
+
   if (preview) {
+    const url = `/post/${id}?post=${compressData(post)}`;
     return (
       <PostWrapper className={isNew ? 'highlighted' : ''}>
         <PreviewWrapper>
@@ -98,7 +99,7 @@ export const Post = ({
             <TextWrapper>
               {preview ? truncateText(body, 100) : body}
             </TextWrapper>
-            <Link href={`/post/${id}`}>Read more</Link>
+            <Link href={url}>Read more</Link>
           </div>
         </PreviewWrapper>
       </PostWrapper>
@@ -120,7 +121,6 @@ export const Post = ({
         </TextWrapper>
         <Title>{title}</Title>
         <TextWrapper>{body}</TextWrapper>
-        {preview && <Link href={`/post/${id}`}>Read more</Link>}
       </FullPostWrapper>
     </PostWrapper>
   );

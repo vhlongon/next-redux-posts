@@ -1,15 +1,46 @@
 import { Post } from '@/app/components/Post';
-import { fetchPost } from '@/lib/api/posts';
+import { fetchPost, fetchPosts } from '@/lib/api/posts';
+import { validatePostWithAuthor } from '@/lib/features/posts/postsValidation';
+import type { PostWithAuthor } from '@/lib/features/posts/postTypes';
+import { decompressData } from '@/lib/utils/compression';
 
 type Params = { id: string };
+type SearchParams = { [key: string]: string | string[] | undefined };
 
 type PostPageProps = {
-  params: Params;
+  params: Promise<Params>;
+  searchParams: Promise<SearchParams>;
 };
 
-export default async function PostPage({ params }: PostPageProps) {
+export async function generateStaticParams() {
+  const posts = await fetchPosts(200, 0).then(res => res.posts);
+
+  return posts.map((post: PostWithAuthor) => ({
+    id: String(post.id),
+  }));
+}
+
+const getPostFromUrl = (searchParams: Awaited<SearchParams>) => {
+  const urlData = searchParams.post;
+
+  if (!urlData || typeof urlData !== 'string') {
+    return null;
+  }
+
+  try {
+    return validatePostWithAuthor(decompressData(urlData));
+  } catch (error) {
+    return null;
+  }
+};
+
+export default async function PostPage({
+  params,
+  searchParams,
+}: PostPageProps) {
   const { id } = await params;
-  const postData = await fetchPost(id);
+  const postDataFromUrl = getPostFromUrl(await searchParams);
+  const postData = postDataFromUrl ?? (await fetchPost(id));
 
   return (
     <div style={{ padding: 'var(--spacing-xl)' }}>
@@ -19,7 +50,7 @@ export default async function PostPage({ params }: PostPageProps) {
           <Post {...postData} />
         </>
       ) : (
-        <h2>No data for post with id {id}</h2>
+        <h2 style={{ textAlign: 'center' }}>No data for post with id {id}</h2>
       )}
     </div>
   );
