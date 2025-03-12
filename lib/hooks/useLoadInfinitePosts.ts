@@ -9,10 +9,12 @@ export const useLoadInfinitePosts = (initialData: PostsWithAuthorResponse) => {
       limit: initialData.limit,
       skip: initialData.skip,
     });
+
   const { ref, entry } = useIntersectionObserver();
+
   const queryPosts = data?.pages.flatMap(page => page.posts) ?? [];
-  const total = initialData.total;
-  const hasMore = Boolean(queryPosts.length && queryPosts.length < total);
+  const total = data?.pages[0]?.total ?? initialData.total;
+  const hasMore = queryPosts.length < total;
   const loadMorePosts =
     entry?.isIntersecting && !isFetching && !isLoading && hasMore;
 
@@ -22,7 +24,8 @@ export const useLoadInfinitePosts = (initialData: PostsWithAuthorResponse) => {
     }
   }, [loadMorePosts, fetchNextPage]);
 
-  const posts = isLoading ? initialData.posts : queryPosts;
+  // Always use query data if available
+  const posts = data?.pages.flatMap(page => page.posts) ?? initialData.posts;
 
   return { posts, ref, error, isFetching, isLoading };
 };

@@ -4,7 +4,7 @@ export const PostSchema = z.object({
   id: z.number(),
   title: z.string(),
   body: z.string(),
-  tags: z.array(z.string()),
+  tags: z.array(z.string()).optional(),
   userId: z.number(),
 });
 

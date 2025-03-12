@@ -1,5 +1,9 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import type { PostsWithAuthorResponse, Post } from './postTypes';
+import type {
+  PostsWithAuthorResponse,
+  Post,
+  PostWithAuthor,
+} from './postTypes';
 import { fetchPosts } from '@/lib/api/posts';
 
 type GetPostsArgs = Pick<PostsWithAuthorResponse, 'limit' | 'skip'>;
@@ -20,7 +24,50 @@ export const postsApiSlice = createApi({
           return lastPage.skip + lastPage.limit;
         },
       },
+      async onCacheEntryAdded(
+        arg,
+        { cacheDataLoaded, cacheEntryRemoved, dispatch }
+      ) {
+        console.log('Attempting to establish WebSocket connection...', { arg });
+
+        const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+        const url = `${protocol}//${window.location.host}/api/ws`;
+
+        const ws = new WebSocket(url);
+
+        try {
+          await cacheDataLoaded;
+
+          const listener = (event: MessageEvent) => {
+            const data = JSON.parse(event.data) as PostWithAuthor;
+            console.log('Received WebSocket message:', data);
+
+            // Update the cache with the new post
+            dispatch(
+              postsApiSlice.util.updateQueryData(
+                'getInfinitePosts',
+                arg,
+                draft => {
+                  // Add the new post to the first page of results
+                  if (draft.pages && draft.pages.length > 0 && draft.pages[0]) {
+                    draft.pages[0].posts.unshift(data);
+                    draft.pages[0].total += 1;
+                  }
+                }
+              )
+            );
+          };
+
+          ws.addEventListener('message', listener);
+        } catch (err) {
+          console.error('Error in WebSocket handling:', err);
+        }
+
+        await cacheEntryRemoved;
+        ws.close();
+      },
       queryFn: async ({ queryArg: { limit }, pageParam }) => {
+        console.log('Fetching posts with:', { limit, pageParam });
         const response = await fetchPosts(limit, pageParam);
         return { data: response };
       },
@@ -32,7 +79,6 @@ export const postsApiSlice = createApi({
       query: ({ id }) => {
         return { url: `posts/${id}`, method: 'GET' };
       },
-
       providesTags: (_result, _error, { id }) => {
         return [{ type: 'Posts', id: `${id}` }];
       },
