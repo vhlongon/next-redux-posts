@@ -12,11 +12,14 @@ export default async function PostPage({ params }: PostPageProps) {
   const postData = await fetchPost(id);
 
   return (
-    <div style={{ padding: '100px' }}>
+    <div style={{ padding: 'var(--spacing-xl)' }}>
       {postData ? (
-        <Post {...postData} />
+        <>
+          <h2 style={{ textAlign: 'center' }}>Post: {id}</h2>
+          <Post {...postData} />
+        </>
       ) : (
-        <h1>No data for post with id {id}</h1>
+        <h2>No data for post with id {id}</h2>
       )}
     </div>
   );
