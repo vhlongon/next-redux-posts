@@ -7,7 +7,9 @@ import {
 const baseUrl = 'https://dummyjson.com';
 
 export async function fetchAuthor(id: number) {
-  const response = await fetch(`${baseUrl}/users/${id}`);
+  const response = await fetch(`${baseUrl}/users/${id}`, {
+    cache: 'force-cache',
+  });
   if (!response.ok) throw new Error('Failed to fetch author');
   const data = await response.json();
   return validateAuthor(data);
@@ -17,7 +19,9 @@ export async function fetchPosts(limit = 20, skip = 0) {
   const url = new URL(`${baseUrl}/posts`);
   url.searchParams.set('limit', limit.toString());
   url.searchParams.set('skip', skip.toString());
-  const response = await fetch(url);
+  const response = await fetch(url, {
+    cache: 'force-cache',
+  });
   if (!response.ok) {
     throw new Error('Failed to fetch posts');
   }
@@ -36,8 +40,13 @@ export async function fetchPosts(limit = 20, skip = 0) {
 }
 
 export async function fetchPost(id: string) {
-  const response = await fetch(`${baseUrl}/posts/${id}`);
+  const response = await fetch(`${baseUrl}/posts/${id}`, {
+    cache: 'force-cache',
+  });
   if (!response.ok) {
+    if (response.status === 404) {
+      return null;
+    }
     const error = await response.json();
     throw new Error(error.message);
   }
