@@ -8,7 +8,6 @@ import styled from 'styled-components';
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  margin-top: ${({ theme }) => theme.spacing.xl};
   gap: ${({ theme }) => theme.spacing.base};
 `;
 

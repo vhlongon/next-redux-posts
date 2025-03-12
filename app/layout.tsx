@@ -4,8 +4,14 @@ import StyledComponentsRegistry from '@/lib/registry';
 import type { PropsWithChildren } from 'react';
 import { StoreProvider } from './Providers/StoreProvider';
 import { ThemeProvider } from './Providers/ThemeProvider';
+import { Header } from './components/Header';
+import { headers } from 'next/headers';
 
-export default function RootLayout({ children }: PropsWithChildren) {
+export default async function RootLayout({ children }: PropsWithChildren) {
+  const headersList = await headers();
+  const fullUrl = headersList.get('referer') || '';
+  const pathname = fullUrl.split('/').pop() || '';
+
   return (
     <StoreProvider>
       <html
@@ -23,11 +29,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
         >
           <StyledComponentsRegistry>
             <ThemeProvider>
-              <header>
-                <h1 className="app-heading" data-text="Posts app">
-                  Posts app
-                </h1>
-              </header>
+              <Header pathname={pathname} />
               <section
                 style={{
                   width: '100%',
