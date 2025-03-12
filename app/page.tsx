@@ -1,13 +1,13 @@
-import type { Metadata } from 'next';
-import { PostsList } from './components/PostsList';
 import { fetchPosts } from '@/lib/api/posts';
 import { getPropFromParams } from '@/lib/utils/params';
+import type { Metadata } from 'next';
+import { PostsList } from './components/PostsList';
 
 type PostsPageProps = {
-  searchParams: {
+  searchParams: Promise<{
     limit?: string;
     skip?: string;
-  };
+  }>;
 };
 
 export default async function PostsPage({ searchParams }: PostsPageProps) {
