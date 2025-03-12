@@ -38,7 +38,9 @@ export const postsApiSlice = createApi({
             const data = JSON.parse(event.data) as PostWithAuthor;
             console.log('Received WebSocket message:', data);
 
-            // Update the cache with the new post
+            // Update the cache with the new post and mark it as new manually
+            // I tried to follow the instructions at https://redux-toolkit.js.org/rtk-query/usage/streaming-updates
+            // but the data was not refreshed in the UI, could be something related to infinite query
             dispatch(
               postsApiSlice.util.updateQueryData(
                 'getInfinitePosts',
@@ -64,7 +66,6 @@ export const postsApiSlice = createApi({
         ws.close();
       },
       queryFn: async ({ queryArg: { limit }, pageParam }) => {
-        console.log('Fetching posts with:', { limit, pageParam });
         const response = await fetchPosts(limit, pageParam);
         return { data: response };
       },
