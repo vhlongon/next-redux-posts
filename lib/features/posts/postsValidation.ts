@@ -6,6 +6,7 @@ export const PostSchema = z.object({
   body: z.string(),
   tags: z.array(z.string()).optional(),
   userId: z.number(),
+  isNew: z.boolean().optional(),
 });
 
 export const AuthorSchema = z.object({

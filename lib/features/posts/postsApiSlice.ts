@@ -46,7 +46,8 @@ export const postsApiSlice = createApi({
                 draft => {
                   // Add the new post to the first page of results
                   if (draft.pages && draft.pages.length > 0 && draft.pages[0]) {
-                    draft.pages[0].posts.unshift(data);
+                    // Mark the post as new when adding it
+                    draft.pages[0].posts.unshift({ ...data, isNew: true });
                     draft.pages[0].total += 1;
                   }
                 }

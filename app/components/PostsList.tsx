@@ -2,8 +2,6 @@
 
 import { PostsWithAuthorResponse } from '@/lib/features/posts/postTypes';
 import { useLoadInfinitePosts } from '@/lib/hooks/useLoadInfinitePosts';
-import { getClient } from '@/lib/socket/client';
-import type { MouseEventHandler } from 'react';
 import { Post } from './Post';
 
 type PostsProps = {
@@ -15,34 +13,8 @@ export const PostsList = ({ initialData }: PostsProps) => {
     useLoadInfinitePosts(initialData);
   const attachLoadAnchor = !isLoading && !isFetching;
 
-  const sendMessage: MouseEventHandler<HTMLButtonElement> = e => {
-    e.preventDefault();
-    //TODO: move this to a hook
-    // Send a test post through the WebSocket
-
-    const ws = getClient();
-
-    ws.onopen = () => {
-      const newPost = {
-        id: Date.now(), // Use timestamp to ensure unique ID
-        title: 'Sample Post Title',
-        body: 'This is the content of the post',
-        tags: ['test', 'sample'],
-        userId: 1,
-        author: {
-          id: 1,
-          firstName: 'John',
-          lastName: 'Doe',
-        },
-      };
-      ws.send(JSON.stringify(newPost));
-      ws.close();
-    };
-  };
-
   return (
     <>
-      <button onClick={sendMessage}>add post</button>
       <ul style={{ marginBottom: '100px' }}>
         {posts?.map(post => (
           <li
