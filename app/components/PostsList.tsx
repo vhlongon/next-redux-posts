@@ -12,7 +12,7 @@ const List = styled.ul`
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing.lg};
-  max-width: 1000px;
+  width: 100%;
   margin: 0 auto ${({ theme }) => theme.spacing.xxl} auto;
   padding-left: 0;
 `;
