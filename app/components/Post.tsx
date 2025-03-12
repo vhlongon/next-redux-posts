@@ -3,6 +3,7 @@
 import type { PostWithAuthor } from '@/lib/features/posts/postTypes';
 import Link from 'next/link';
 import styled, { keyframes } from 'styled-components';
+import Avatar from './Avatar';
 
 type PostProps = PostWithAuthor & {
   preview?: boolean;
@@ -47,6 +48,31 @@ export const PostWrapper = styled.article`
 const truncateText = (text: string, maxLength: number) =>
   text.length > maxLength ? `${text.slice(0, maxLength)}...` : text;
 
+const AvatarWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-bottom: ${({ theme }) => theme.spacing.base};
+`;
+
+const Title = styled.h3`
+  margin: ${({ theme }) => theme.spacing.sm} 0;
+`;
+
+const PreviewWrapper = styled.div`
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: ${({ theme }) => theme.spacing.base};
+`;
+
+const TextWrapper = styled.p`
+  display: flex;
+  flex-direction: column;
+`;
+
+const FullPostWrapper = styled.div`
+  text-align: center;
+`;
+
 export const Post = ({
   preview = false,
   title,
@@ -55,14 +81,47 @@ export const Post = ({
   author,
   isNew = false,
 }: PostProps) => {
+  if (preview) {
+    return (
+      <PostWrapper className={isNew ? 'highlighted' : ''}>
+        <PreviewWrapper>
+          <Avatar
+            firstName={author.firstName}
+            lastName={author.lastName}
+            size={40}
+          />
+          <div>
+            <span>
+              By: {author.firstName} {author.lastName}
+            </span>
+            <Title>{title}</Title>
+            <TextWrapper>
+              {preview ? truncateText(body, 100) : body}
+            </TextWrapper>
+            <Link href={`/post/${id}`}>Read more</Link>
+          </div>
+        </PreviewWrapper>
+      </PostWrapper>
+    );
+  }
+
   return (
     <PostWrapper className={isNew ? 'highlighted' : ''}>
-      <h3>{title}</h3>
-      <p>{preview ? truncateText(body, 100) : body}</p>
-      <p>
-        By: {author.firstName} {author.lastName}
-      </p>
-      {preview && <Link href={`/post/${id}`}>Read more</Link>}
+      <FullPostWrapper>
+        <AvatarWrapper>
+          <Avatar
+            firstName={author.firstName}
+            lastName={author.lastName}
+            size={80}
+          />
+        </AvatarWrapper>
+        <TextWrapper>
+          By: {author.firstName} {author.lastName}
+        </TextWrapper>
+        <Title>{title}</Title>
+        <TextWrapper>{body}</TextWrapper>
+        {preview && <Link href={`/post/${id}`}>Read more</Link>}
+      </FullPostWrapper>
     </PostWrapper>
   );
 };
