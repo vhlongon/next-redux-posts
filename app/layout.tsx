@@ -12,7 +12,15 @@ export default function RootLayout({ children }: PropsWithChildren) {
         lang="en"
         className={`${orbitron.variable} ${spaceGrotesk.variable}`}
       >
-        <body>
+        <body
+          style={{
+            padding: 'var(--spacing-xl)',
+            display: 'flex',
+            justifyContent: 'center',
+            minHeight: '100vh',
+            flexDirection: 'column',
+          }}
+        >
           <StyledComponentsRegistry>
             <ThemeProvider>
               <header>
@@ -20,7 +28,14 @@ export default function RootLayout({ children }: PropsWithChildren) {
                   Posts app
                 </h1>
               </header>
-              <section>
+              <section
+                style={{
+                  width: '100%',
+                  flex: 1,
+                  display: 'flex',
+                  justifyContent: 'center',
+                }}
+              >
                 <main>{children}</main>
               </section>
             </ThemeProvider>
