@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useIntersectionObserver } from 'usehooks-ts';
 import { useGetInfinitePostsInfiniteQuery } from '../features/posts/postsApiSlice';
-import { PostsWithAuthorResponse } from '../features/posts/postTypes';
+import type { PostsWithAuthorResponse } from '../features/posts/postTypes';
 
 export const useLoadInfinitePosts = (props: PostsWithAuthorResponse) => {
   const { data, isLoading, error, fetchNextPage, isFetching } =
