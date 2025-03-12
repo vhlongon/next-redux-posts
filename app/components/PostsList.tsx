@@ -9,17 +9,27 @@ type PostsProps = {
 };
 
 const List = styled.ul`
-  margin-bottom: 100px;
+  margin-bottom: ${({ theme }) => theme.spacing.xxl};
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: ${({ theme }) => theme.spacing.lg};
   max-width: 1000px;
   margin: 0 auto;
   padding-left: 0;
 `;
 
+const LoadingText = styled.p`
+  padding: ${({ theme }) => theme.spacing.xl};
+  text-align: center;
+`;
+
+const LoadingAnchor = styled.div`
+  height: ${({ theme }) => theme.spacing.xl};
+  padding: ${({ theme }) => theme.spacing.xl};
+`;
+
 export const ListItem = styled.li`
-  padding-bottom: 50px;
+  padding-bottom: ${({ theme }) => theme.spacing.base};
   list-style: none;
 `;
 
@@ -38,10 +48,8 @@ export const PostsList = ({ initialData }: PostsProps) => {
         ))}
       </List>
       {error && <div>{error.message}</div>}
-      {isFetching && <p style={{ padding: '100px' }}>Loading more posts...</p>}
-      {attachLoadAnchor && (
-        <div style={{ height: '100px', padding: '100px' }} ref={ref} />
-      )}
+      {isFetching && <LoadingText>Loading more posts...</LoadingText>}
+      {attachLoadAnchor && <LoadingAnchor ref={ref} />}
     </>
   );
 };
