@@ -2,7 +2,22 @@
 
 import { validatePostWithAuthor } from '@/lib/features/posts/postsValidation';
 import { getClient } from '@/lib/socket/client';
-import { FormEventHandler } from 'react';
+import type { FormEventHandler } from 'react';
+import styled from 'styled-components';
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  margin-top: ${({ theme }) => theme.spacing.xl};
+  gap: ${({ theme }) => theme.spacing.base};
+`;
+
+const InputWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.spacing.xs};
+  min-width: 300px;
+`;
 
 export const AddPostForm = () => {
   const sendMessage: FormEventHandler<HTMLFormElement> = e => {
@@ -36,12 +51,34 @@ export const AddPostForm = () => {
   };
 
   return (
-    <form onSubmit={sendMessage}>
-      <input type="text" name="title" placeholder="Title" />
-      <input type="text" name="body" placeholder="Body" />
-      <input type="text" name="firstName" placeholder="First Name" />
-      <input type="text" name="lastName" placeholder="Last Name" />
+    <Form onSubmit={sendMessage}>
+      <InputWrapper>
+        <label htmlFor="title">Title:</label>
+        <input type="text" id="title" name="title" placeholder="Title" />
+      </InputWrapper>
+      <InputWrapper>
+        <label htmlFor="body">Body:</label>
+        <input type="text" id="body" name="body" placeholder="Body" />
+      </InputWrapper>
+      <InputWrapper>
+        <label htmlFor="firstName">First Name:</label>
+        <input
+          type="text"
+          id="firstName"
+          name="firstName"
+          placeholder="First Name"
+        />
+      </InputWrapper>
+      <InputWrapper>
+        <label htmlFor="lastName">Last Name:</label>
+        <input
+          type="text"
+          id="lastName"
+          name="lastName"
+          placeholder="Last Name"
+        />
+      </InputWrapper>
       <button type="submit">Add Post</button>
-    </form>
+    </Form>
   );
 };

@@ -252,3 +252,116 @@ p {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+/* Form styling */
+form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: var(--spacing-xl);
+  background-color: var(--color-surface);
+  border-radius: var(--border-radius-md);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--color-neon-blue);
+}
+
+form h2 {
+  margin-top: 0;
+  margin-bottom: var(--spacing-lg);
+  font-size: var(--font-size-2xl);
+  color: var(--color-neon-blue);
+  text-align: center;
+  font-family: var(--font-heading);
+  font-weight: 700;
+}
+
+form > div {
+  margin-bottom: var(--spacing-base);
+  width: 100%;
+}
+
+.name-fields {
+  display: flex;
+  gap: var(--spacing-base);
+}
+
+form input,
+form textarea {
+  width: 100%;
+  padding: var(--spacing-sm);
+  border: 1px solid var(--color-neon-blue);
+  border-radius: var(--border-radius-sm);
+  font-size: var(--font-size-base);
+  font-family: var(--font-body);
+  color: var(--color-text-primary);
+  background-color: rgba(22, 22, 30, 0.8);
+  transition: var(--transition-default);
+}
+
+form textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+form input:focus,
+form textarea:focus {
+  outline: none;
+  border-color: var(--color-neon-pink);
+  box-shadow: var(--glow-pink);
+}
+
+form button {
+  display: block;
+  width: 100%;
+  padding: var(--spacing-sm);
+  background-color: transparent;
+  color: var(--color-neon-green);
+  border: 1px solid var(--color-neon-green);
+  border-radius: var(--border-radius-pill);
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  font-family: var(--font-heading);
+  cursor: pointer;
+  transition: var(--transition-default);
+  margin-top: var(--spacing-lg);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  position: relative;
+  overflow: hidden;
+}
+
+form button:hover {
+  background-color: var(--color-neon-green);
+  color: var(--color-background);
+  box-shadow: var(--glow-green);
+  transform: translateY(-2px);
+}
+
+form button:active {
+  transform: translateY(0);
+}
+
+form button:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(45, 204, 20, 0.4),
+    transparent
+  );
+  transition: 0.5s;
+}
+
+form button:hover:before {
+  left: 100%;
+}
+
+label {
+  margin-bottom: var(--spacing-xs);
+  font-size: var(--font-size-sm);
+  color: var(--color-neon-blue);
+}
