@@ -50,6 +50,7 @@ export const AddPostForm = () => {
     const payload = validatePostWithAuthor(postWithAuthor);
 
     ws.onopen = () => {
+      console.info('Sending message to server');
       ws.send(JSON.stringify(payload));
       ws.close();
     };

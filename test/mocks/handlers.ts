@@ -12,7 +12,10 @@ export const handlers = [
       limit: mockedPosts.length,
     });
   }),
-  wsCLient.addEventListener('connection', () => {
-    console.log('Mocking outgoing WebSocket connection via msw');
+  wsCLient.addEventListener('connection', ({ client }) => {
+    console.log('[MSW] Mocking outgoing WebSocket connection via msw');
+    client.addEventListener('message', event => {
+      console.log('[MSW] from client:', event.data);
+    });
   }),
 ];
