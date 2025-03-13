@@ -8,7 +8,7 @@ type AvatarProps = {
   textColor?: string;
 };
 
-const getInitials = (firstName: string, lastName: string): string => {
+export const getInitials = (firstName: string, lastName: string): string => {
   const firstInitial = firstName ? firstName.charAt(0).toUpperCase() : '';
   const lastInitial = lastName ? lastName.charAt(0).toUpperCase() : '';
   return `${firstInitial}${lastInitial}`;
@@ -25,6 +25,8 @@ const Avatar = ({
 
   return (
     <div
+      role="img"
+      aria-label={`Avatar for ${firstName} ${lastName}`}
       style={{
         width: `${size}px`,
         height: `${size}px`,
