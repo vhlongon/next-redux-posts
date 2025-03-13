@@ -30,6 +30,17 @@ const getPostFromUrl = (searchParams: Awaited<SearchParams>) => {
   try {
     return validatePostWithAuthor(decompressData(urlData));
   } catch (error) {
+    console.error('Error validating post data:', error);
+    return null;
+  }
+};
+
+const getData = async (searchParams: Awaited<SearchParams>, id: string) => {
+  try {
+    const postDataFromUrl = getPostFromUrl(searchParams);
+    const postData = postDataFromUrl ?? (await fetchPost(id));
+    return postData;
+  } catch (error) {
     return null;
   }
 };
@@ -39,8 +50,7 @@ export default async function PostPage({
   searchParams,
 }: PostPageProps) {
   const { id } = await params;
-  const postDataFromUrl = getPostFromUrl(await searchParams);
-  const postData = postDataFromUrl ?? (await fetchPost(id));
+  const postData = await getData(await searchParams, id);
 
   return (
     <div style={{ padding: 'var(--spacing-xl)' }}>
@@ -50,7 +60,9 @@ export default async function PostPage({
           <Post {...postData} />
         </>
       ) : (
-        <h2 style={{ textAlign: 'center' }}>No data for post with id {id}</h2>
+        <h2 style={{ textAlign: 'center' }}>
+          No data available for post with id {id}
+        </h2>
       )}
     </div>
   );
