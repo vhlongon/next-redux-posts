@@ -10,7 +10,7 @@ export default defineConfig({
     setupFiles: './test.setup.ts',
     coverage: {
       reporter: ['lcov', 'html', 'json', 'text-summary'],
-      include: ['app/**', 'lib/**'],
+      include: ['app/**', 'lib/**', '!app/styles/**'],
     },
   },
 });
