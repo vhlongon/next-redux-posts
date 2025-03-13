@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { AddPostForm } from '../components/AddPostForm';
 
 export default function AddPostPage() {
@@ -8,3 +9,7 @@ export default function AddPostPage() {
     </div>
   );
 }
+
+export const metadata: Metadata = {
+  title: 'Add Post',
+};
