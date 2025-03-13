@@ -2,7 +2,7 @@ import { render, screen } from '@/test/utils';
 import { Header } from '../Header';
 
 describe('Header', () => {
-  it('should render title correctly', async () => {
+  test('should render title correctly', async () => {
     const Component = await Header({ pathname: 'something' });
     render(Component);
 
@@ -11,7 +11,7 @@ describe('Header', () => {
     ).toBeInTheDocument();
   });
 
-  it('should render Add Post link when NOT on the add post page', async () => {
+  test('should render Add Post link when NOT on the add post page', async () => {
     const Component = await Header({ pathname: 'something' });
     render(Component);
 
@@ -21,7 +21,7 @@ describe('Header', () => {
     );
   });
 
-  it('should NOT render Add Post link when on the add post page', async () => {
+  test('should NOT render Add Post link when on the add post page', async () => {
     const Component = await Header({ pathname: '/add-post' });
     render(Component);
 

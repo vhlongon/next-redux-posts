@@ -2,7 +2,7 @@ import { render, screen } from '@/test/utils';
 import Avatar, { getInitials } from '../Avatar';
 
 describe('Avatar', () => {
-  it('should render correctly as image with initials and accessible name', () => {
+  test('should render correctly as image with initials and accessible name', () => {
     render(<Avatar firstName="John" lastName="Doe" />);
 
     expect(screen.getByText('JD')).toBeInTheDocument();
@@ -12,11 +12,11 @@ describe('Avatar', () => {
   });
 
   describe('getInitials', () => {
-    it('should return the initials of the first and last name', () => {
+    test('should return the initials of the first and last name', () => {
       expect(getInitials('John', 'Doe')).toBe('JD');
     });
 
-    it('should handle empty strings', () => {
+    test('should handle empty strings', () => {
       expect(getInitials('', '')).toBe('');
     });
   });

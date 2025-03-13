@@ -6,7 +6,7 @@ import { compressData } from '@/lib/utils/compression';
 const mockedPost = createPostMock();
 
 describe('Post', () => {
-  it('should render correctly post correctly when not in preview mode', () => {
+  test('should render correctly post correctly when not in preview mode', () => {
     render(<Post {...mockedPost} />);
 
     expect(
@@ -27,7 +27,7 @@ describe('Post', () => {
     ).toBeInTheDocument();
   });
 
-  it('should render correctly post correctly when in preview mode', () => {
+  test('should render correctly post correctly when in preview mode', () => {
     render(<Post {...mockedPost} preview />);
 
     expect(
@@ -54,7 +54,7 @@ describe('Post', () => {
     ).toBeInTheDocument();
   });
 
-  it('should append highlighted class when isNew is true', () => {
+  test('should append highlighted class when isNew is true', () => {
     render(<Post {...mockedPost} isNew />);
 
     expect(screen.getByRole('article')).toHaveClass('highlighted');
