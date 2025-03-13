@@ -1,6 +1,6 @@
 import './styles/globals.css';
 import { orbitron, spaceGrotesk } from './styles/fonts';
-import StyledComponentsRegistry from '@/lib/registry';
+import StyledComponentsRegistry from '@/app/styles/registry';
 import type { PropsWithChildren } from 'react';
 import { StoreProvider } from './Providers/StoreProvider';
 import { ThemeProvider } from './Providers/ThemeProvider';
