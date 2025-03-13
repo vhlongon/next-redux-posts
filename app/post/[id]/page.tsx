@@ -35,6 +35,13 @@ const getPostFromUrl = (searchParams: Awaited<SearchParams>) => {
   }
 };
 
+export async function generateMetadata({ params }: PostPageProps) {
+  const { id } = await params;
+
+  return {
+    title: `Post ${id}`,
+  };
+}
 const getData = async (searchParams: Awaited<SearchParams>, id: string) => {
   try {
     const postDataFromUrl = getPostFromUrl(searchParams);
