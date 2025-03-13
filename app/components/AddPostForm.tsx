@@ -7,7 +7,7 @@ import styled from 'styled-components';
 
 const Form = styled.form`
   display: flex;
-  min-width: 480px;
+  width: 100%;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing.base};
 `;

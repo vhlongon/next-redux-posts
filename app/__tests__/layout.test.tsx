@@ -1,13 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import RootLayout from '@/app/layout';
 
-// Only mock next/headers since it's server-side only
-vi.mock('next/headers', () => ({
-  headers: () => ({
-    get: () => 'https://example.com/test-page',
-  }),
-}));
-
 // Mock next/font/google to return a mock font object
 vi.mock('next/font/google', () => ({
   Space_Grotesk: () => ({
@@ -18,11 +11,6 @@ vi.mock('next/font/google', () => ({
   }),
 }));
 
-// Mock the Header component since it's server-side only
-vi.mock('@/app/components/Header', () => ({
-  Header: () => <header>Header</header>,
-}));
-
 describe('RootLayout', () => {
   // Mock console.error since the render ouputs the component inside a div
   // Warning: validateDOMNesting(...): <html> cannot appear as a child of <div>.
@@ -30,7 +18,7 @@ describe('RootLayout', () => {
   test('renders the layout with children and correct structure', async () => {
     const testChild = <div data-testid="test-child">Test Content</div>;
 
-    const { container } = render(await RootLayout({ children: testChild }));
+    const { container } = render(<RootLayout>{testChild}</RootLayout>);
 
     // Check if the child content is rendered
     expect(screen.getByTestId('test-child')).toBeInTheDocument();

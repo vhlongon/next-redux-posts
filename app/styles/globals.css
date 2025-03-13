@@ -33,7 +33,7 @@ body {
   --spacing-lg: 1.5rem;
   --spacing-xl: 2rem;
   --spacing-xxl: 2.5rem;
-
+  --spacing-xxxl: 5rem;
   /* Line Heights */
   --line-height-tight: 1.1;
   --line-height-snug: 1.25;
@@ -295,8 +295,8 @@ form > div {
   gap: var(--spacing-base);
 }
 
-form input,
-form textarea {
+input,
+textarea {
   width: 100%;
   padding: var(--spacing-sm);
   border: 1px solid var(--color-neon-blue);
@@ -308,19 +308,19 @@ form textarea {
   transition: var(--transition-default);
 }
 
-form textarea {
+textarea {
   min-height: 120px;
   resize: vertical;
 }
 
-form input:focus,
-form textarea:focus {
+input:focus,
+textarea:focus {
   outline: none;
   border-color: var(--color-neon-pink);
   box-shadow: var(--glow-pink);
 }
 
-form button {
+button {
   display: block;
   width: 100%;
   padding: var(--spacing-sm);
@@ -334,24 +334,23 @@ form button {
   cursor: pointer;
   transition: var(--transition-default);
   margin-top: var(--spacing-lg);
-  text-transform: uppercase;
   letter-spacing: 0.05em;
   position: relative;
   overflow: hidden;
 }
 
-form button:hover {
+button:hover {
   background-color: var(--color-neon-green);
   color: var(--color-background);
   box-shadow: var(--glow-green);
   transform: translateY(-2px);
 }
 
-form button:active {
+button:active {
   transform: translateY(0);
 }
 
-form button:before {
+button:before {
   content: '';
   position: absolute;
   top: 0;
@@ -367,7 +366,7 @@ form button:before {
   transition: 0.5s;
 }
 
-form button:hover:before {
+button:hover:before {
   left: 100%;
 }
 

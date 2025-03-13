@@ -14,6 +14,14 @@ export const cyberpunkTheme: DefaultTheme = {
     heading: 'var(--font-heading)',
     body: 'var(--font-body)',
   },
+  fontSizes: {
+    xs: 'var(--font-size-xs)',
+    sm: 'var(--font-size-sm)',
+    base: 'var(--font-size-base)',
+    lg: 'var(--font-size-lg)',
+    xl: 'var(--font-size-xl)',
+    xxl: 'var(--font-size-xxl)',
+  },
   borderRadius: {
     sm: 'var(--border-radius-sm)',
     md: 'var(--border-radius-md)',
@@ -32,6 +40,7 @@ export const cyberpunkTheme: DefaultTheme = {
     lg: 'var(--spacing-lg)',
     xl: 'var(--spacing-xl)',
     xxl: 'var(--spacing-xxl)',
+    xxxl: 'var(--spacing-xxxl)',
   },
   colors: {
     // Base colors

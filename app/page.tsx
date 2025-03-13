@@ -17,7 +17,13 @@ export default async function PostsPage({ searchParams }: PostsPageProps) {
   const { posts, total } = await fetchPosts(limit, skip);
 
   return (
-    <div style={{ padding: 'var(--spacing-xl)' }}>
+    <div
+      style={{
+        padding: 'var(--spacing-xl)',
+        maxWidth: '1000px',
+        margin: '0 auto',
+      }}
+    >
       <h2 style={{ textAlign: 'center' }}>Posts</h2>
       <PostsList
         initialData={{

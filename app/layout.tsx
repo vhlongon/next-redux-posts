@@ -5,13 +5,8 @@ import type { PropsWithChildren } from 'react';
 import { StoreProvider } from './Providers/StoreProvider';
 import { ThemeProvider } from './Providers/ThemeProvider';
 import { Header } from './components/Header';
-import { headers } from 'next/headers';
 
-export default async function RootLayout({ children }: PropsWithChildren) {
-  const headersList = await headers();
-  const fullUrl = headersList.get('referer') || '';
-  const pathname = fullUrl.split('/').pop() || '';
-
+export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <StoreProvider>
       <html
@@ -20,7 +15,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
       >
         <body
           style={{
-            padding: 'var(--spacing-xl)',
+            padding: 'var(--spacing-xxxl)',
             display: 'flex',
             justifyContent: 'center',
             minHeight: '100vh',
@@ -29,7 +24,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
         >
           <StyledComponentsRegistry>
             <ThemeProvider>
-              <Header pathname={pathname} />
+              <Header />
               <section
                 style={{
                   width: '100%',
