@@ -1,5 +1,5 @@
 import { http, HttpResponse, ws } from 'msw';
-import { mockedPosts } from './postMock';
+import { mockedPostWithAuthor, mockedPosts, mockedUser } from './postMock';
 
 const wsCLient = ws.link('ws://localhost:3000/api/ws');
 
@@ -11,6 +11,12 @@ export const handlers = [
       skip: 0,
       limit: mockedPosts.length,
     });
+  }),
+  http.get('https://dummyjson.com/posts/:id', () => {
+    return HttpResponse.json(mockedPostWithAuthor);
+  }),
+  http.get('https://dummyjson.com/users/:id', () => {
+    return HttpResponse.json(mockedUser);
   }),
   wsCLient.addEventListener('connection', ({ client }) => {
     console.log('[MSW] Mocking outgoing WebSocket connection via msw');
