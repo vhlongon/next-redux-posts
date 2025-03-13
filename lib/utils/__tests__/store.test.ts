@@ -1,7 +1,7 @@
 import { makeStore } from '@/lib/store';
 
 describe('store', () => {
-  it('should create a store with the correct initial state and methods', () => {
+  test('should create a store with the correct initial state and methods', () => {
     const store = makeStore();
     const state = store.getState();
     expect(state).toEqual({
