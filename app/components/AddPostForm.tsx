@@ -61,7 +61,7 @@ export const AddPostForm = () => {
   };
 
   return (
-    <Form onSubmit={sendMessage}>
+    <Form onSubmit={sendMessage} aria-label="Add Post Form">
       <InputWrapper>
         <label htmlFor="title">Title:</label>
         <input type="text" id="title" name="title" placeholder="Title" />
