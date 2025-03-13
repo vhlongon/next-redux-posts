@@ -25,7 +25,6 @@ export const postsApiSlice = createApi({
         arg,
         { cacheDataLoaded, cacheEntryRemoved, dispatch }
       ) {
-        console.log('Attempting to establish WebSocket connection...', { arg });
         const ws = getClient();
 
         try {
