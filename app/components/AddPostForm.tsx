@@ -7,6 +7,7 @@ import styled from 'styled-components';
 
 const Form = styled.form`
   display: flex;
+  min-width: 480px;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing.base};
 `;
@@ -16,6 +17,15 @@ const InputWrapper = styled.div`
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing.xs};
   min-width: 300px;
+`;
+
+const Button = styled.button`
+  width: fit-content;
+`;
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
 `;
 
 export const AddPostForm = () => {
@@ -32,8 +42,8 @@ export const AddPostForm = () => {
       userId: 123,
       author: {
         id: 1,
-        firstName: post['firstName'],
-        lastName: post['lastName'],
+        firstName: post.firstName,
+        lastName: post.lastName,
       },
     };
 
@@ -57,7 +67,7 @@ export const AddPostForm = () => {
       </InputWrapper>
       <InputWrapper>
         <label htmlFor="body">Body:</label>
-        <input type="text" id="body" name="body" placeholder="Body" />
+        <textarea id="body" rows={10} name="body" placeholder="Body" />
       </InputWrapper>
       <InputWrapper>
         <label htmlFor="firstName">First Name:</label>
@@ -77,7 +87,9 @@ export const AddPostForm = () => {
           placeholder="Last Name"
         />
       </InputWrapper>
-      <button type="submit">Add Post</button>
+      <ButtonWrapper>
+        <Button type="submit">Add Post</Button>
+      </ButtonWrapper>
     </Form>
   );
 };
