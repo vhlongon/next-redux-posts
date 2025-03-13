@@ -1,9 +1,9 @@
-import { createPostMock } from '@/test/mocks/postMock';
+import { createPostWithAuthorMock } from '@/test/mocks/postMock';
 import { render, screen } from '@/test/utils';
 import { Post, truncateText } from '../Post';
 import { compressData } from '@/lib/utils/compression';
 
-const mockedPost = createPostMock();
+const mockedPost = createPostWithAuthorMock();
 
 describe('Post', () => {
   test('should render correctly post correctly when not in preview mode', () => {

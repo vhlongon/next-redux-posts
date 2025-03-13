@@ -1,22 +1,32 @@
-import type { PostWithAuthor } from '@/lib/features/posts/postTypes';
+import type {
+  Author,
+  Post,
+  PostWithAuthor,
+} from '@/lib/features/posts/postTypes';
 
-export const postMock: PostWithAuthor = {
+export const mockedUser: Author = {
+  id: 1,
+  firstName: 'John',
+  lastName: 'Doe',
+};
+
+export const mockedPost: Post = {
   id: 1,
   title: 'Test Post',
   body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-  author: {
-    firstName: 'John',
-    lastName: 'Doe',
-    id: 1,
-  },
   userId: 1,
   tags: ['test', 'mock'],
 };
 
-export const createPostMock = (
+export const mockedPostWithAuthor: PostWithAuthor = {
+  ...mockedPost,
+  author: mockedUser,
+};
+
+export const createPostWithAuthorMock = (
   post?: Partial<PostWithAuthor>
 ): PostWithAuthor => {
-  const { author: defaultAuthor, ...defaultPostProps } = postMock;
+  const { author: defaultAuthor, ...defaultPostProps } = mockedPostWithAuthor;
   const { author, ...postProps } = post ?? {};
   return {
     ...defaultPostProps,
@@ -28,14 +38,18 @@ export const createPostMock = (
   };
 };
 
+export const createPostMock = (post?: Partial<Post>): Post => {
+  const { ...defaultPostProps } = mockedPost;
+  const { ...postProps } = post ?? {};
+  return {
+    ...defaultPostProps,
+    ...postProps,
+  };
+};
+
 export const mockedPosts = [
   createPostMock({
     id: 1,
-    title: 'Getting Started with TypeScript',
-    body: 'TypeScript adds static typing to JavaScript, making it easier to write and maintain large applications. In this post, we will explore the basic concepts of TypeScript, including types, interfaces, and generics. Learn how to set up your development environment and start writing type-safe code today.',
-  }),
-  createPostMock({
-    id: 2,
     title: 'Best Practices for React Components',
     body: 'Writing clean and maintainable React components is crucial for any modern web application. This guide covers essential practices like component composition, proper state management, and performance optimization techniques. We will also discuss when to use hooks versus class components and how to avoid common pitfalls.',
   }),

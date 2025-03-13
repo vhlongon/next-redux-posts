@@ -1,13 +1,18 @@
 import type { PostsWithAuthorResponse } from '@/lib/features/posts/postTypes';
-import { mockedPosts } from '@/test/mocks/postMock';
+import { mockedPosts, mockedUser } from '@/test/mocks/postMock';
 import { render, screen } from '@/test/utils';
 import { PostsList } from '../PostsList';
 
 describe('PostsList', () => {
+  const postsWithAuthor = mockedPosts.map(post => ({
+    ...post,
+    author: mockedUser,
+  }));
+
   const initialData: PostsWithAuthorResponse = {
-    posts: mockedPosts,
-    total: mockedPosts.length,
-    limit: mockedPosts.length,
+    posts: postsWithAuthor,
+    total: postsWithAuthor.length,
+    limit: postsWithAuthor.length,
     skip: 0,
   };
 
