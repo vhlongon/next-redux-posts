@@ -22,10 +22,14 @@ export async function fetchPosts(limit = 20, skip = 0) {
   const response = await fetch(url, {
     cache: 'force-cache',
   });
+
   if (!response.ok) {
-    throw new Error('Failed to fetch posts');
+    throw new Error(response.statusText);
   }
   const data = await response.json();
+  if (!data) {
+    return { posts: [], total: 0, limit, skip };
+  }
   const { posts, total } = validatePosts(data);
 
   const postsWithAuthor = await Promise.all(
@@ -47,8 +51,8 @@ export async function fetchPost(id: string) {
     if (response.status === 404) {
       return null;
     }
-    const error = await response.json();
-    throw new Error(error.message);
+
+    throw new Error(response.statusText);
   }
   const data = await response.json();
 
