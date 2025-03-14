@@ -48,23 +48,34 @@ pnpm test:e2e
 pnpm typecheck
 ```
 
+- **Quality Checks**
+
+```bash
+# Run all quality checks (types, tests, unused code detection)
+pnpm quality
+
+# Check for unused exports and dependencies
+pnpm knip
+```
+
 ## 🔍 Key Features
 
 - Custom server implementation with WebSocket support
-- Redux integration for state management
-- Type-safe development with TypeScript
+- [Redux](https://redux.js.org/) integration for state management
+- Type-safe development with [TypeScript](https://www.typescriptlang.org/)
 - Real-time updates
-- Styled-components for dynamic styling
+- [Styled-components](https://styled-components.com/) for dynamic styling
 - Comprehensive testing suite
 
 ## 🧰 Development Tools
 
-- TypeScript for static type checking
-- Vitest for unit testing
-- Playwright for E2E testing
-- MSW for API mocking
-- Testing Library for component testing
+- [TypeScript](https://www.typescriptlang.org/) for static type checking
+- [Vitest](https://vitest.dev/) for unit testing
+- [Playwright](https://playwright.dev/) for E2E testing
+- [MSW](https://mswjs.io/) for API mocking
+- [Testing Library](https://testing-library.com/) for component testing
 - Custom TypeScript configurations for different environments
+- [Knip](https://knip.dev/) for detecting unused files, exports, and dependencies
 
 ## 📝 Notes
 
@@ -76,8 +87,8 @@ pnpm typecheck
 
 - Private package (not published to npm)
 - Environment-specific configurations
-- Type-safe API calls with Zod validation
+- Type-safe API calls with [Zod](https://zod.dev/) validation
 
 ## 📦 Dependencies
 
-All dependencies are managed through pnpm for faster, more efficient package management. Key dependencies are kept up to date with the latest stable versions.
+All dependencies are managed through [pnpm](https://pnpm.io/) for faster, more efficient package management. Key dependencies are kept up to date with the latest stable versions.
