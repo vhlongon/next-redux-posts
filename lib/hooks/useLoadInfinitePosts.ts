@@ -22,8 +22,8 @@ export const useLoadInfinitePosts = (props: PostsWithAuthorResponse) => {
     }
   }, [loadMorePosts, fetchNextPage]);
 
-  // Always use query data if available, if not use initial data that will be provided by the server
-  const posts = data?.pages.flatMap((page) => page.posts) ?? props.posts;
+  // Always use query data if available, if not use initial data that will be provided server side
+  const posts = queryPosts?.length > 0 ? queryPosts : props.posts;
 
   return { posts, ref, error, isFetching, isLoading };
 };

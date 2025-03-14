@@ -59,7 +59,7 @@ export const PostsList = ({ initialData }: PostsProps) => {
       <AddPostButton onClick={handleOpenDrawer}>Add new</AddPostButton>
       <Drawer isOpen={isDrawerOpen} onClose={handleCloseDrawer}>
         <h2 style={{ textAlign: 'center' }}>Create New Post</h2>
-        <AddPostForm />
+        <AddPostForm onSubmit={handleCloseDrawer} />
       </Drawer>
       <List data-testid="posts-list">
         {posts?.map((post) => (

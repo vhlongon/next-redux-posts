@@ -5,7 +5,8 @@ describe('AddPostForm', () => {
   test('should render correctly', async () => {
     const consoleSpy = vi.spyOn(console, 'info');
     const user = userEvent.setup();
-    render(<AddPostForm />);
+    const onSubmit = vi.fn();
+    render(<AddPostForm onSubmit={onSubmit} />);
 
     expect(screen.getByText('Add Post')).toBeInTheDocument();
 
@@ -23,5 +24,21 @@ describe('AddPostForm', () => {
     await user.click(submitButton);
 
     expect(consoleSpy).toHaveBeenCalledWith('Sending message to server');
+
+    expect(onSubmit).toHaveBeenCalled();
+
+    const post = onSubmit?.mock?.calls?.[0]?.[0];
+
+    expect(post).toMatchObject({
+      id: expect.any(Number),
+      title: 'Test Title',
+      body: 'Test Body',
+      userId: 123,
+      author: {
+        id: 1,
+        firstName: 'Test First Name',
+        lastName: 'Test Last Name'
+      }
+    });
   });
 });

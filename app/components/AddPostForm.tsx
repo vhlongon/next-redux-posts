@@ -1,8 +1,9 @@
 'use client';
 
+import type { PostWithAuthor } from '@/lib/features/posts/postTypes';
 import { validatePostWithAuthor } from '@/lib/features/posts/postsValidation';
 import { getClient } from '@/lib/socket/client';
-import type { FormEventHandler } from 'react';
+import { type FormEventHandler, useRef } from 'react';
 import styled from 'styled-components';
 
 const Form = styled.form`
@@ -28,7 +29,12 @@ const ButtonWrapper = styled.div`
   justify-content: center;
 `;
 
-export const AddPostForm = () => {
+type Props = {
+  onSubmit?: (post: PostWithAuthor) => void;
+};
+
+export const AddPostForm = (props: Props) => {
+  const formRef = useRef<HTMLFormElement>(null);
   const sendMessage: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     const ws = getClient();
@@ -52,6 +58,8 @@ export const AddPostForm = () => {
     ws.onopen = () => {
       console.info('Sending message to server');
       ws.send(JSON.stringify(payload));
+      props.onSubmit?.(payload);
+      formRef.current?.reset();
       ws.close();
     };
 
@@ -61,7 +69,7 @@ export const AddPostForm = () => {
   };
 
   return (
-    <Form onSubmit={sendMessage} aria-label="Add Post Form">
+    <Form onSubmit={sendMessage} aria-label="Add Post Form" ref={formRef}>
       <InputWrapper>
         <label htmlFor="title">Title:</label>
         <input
