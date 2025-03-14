@@ -7,8 +7,8 @@ import styled from 'styled-components';
 
 const Form = styled.form`
   display: flex;
-  width: 100%;
   flex-direction: column;
+  width: 100%;
   gap: ${({ theme }) => theme.spacing.base};
 `;
 
@@ -16,7 +16,7 @@ const InputWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing.xs};
-  min-width: 300px;
+  width: 100%;
 `;
 
 const Button = styled.button`
