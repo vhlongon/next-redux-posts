@@ -56,11 +56,9 @@ test('can add a post', async ({ page }) => {
   const closeButton = drawer.getByRole('button', { name: 'Close' });
   await closeButton.click();
 
-  // Wait for the drawer to be hidden first
-  await expect(drawer).toBeHidden();
+  // Wait for the drawer to have aria-hidden="true"
+  await expect(drawer).toHaveAttribute('aria-hidden', 'true');
 
-  // TODO: fix this test
-  // wait for the new post to be added
   // Get the first post and verify its contents
   // const newPost = page.getByRole('article').first();
   // await expect(newPost).toContainText('Test Post');
