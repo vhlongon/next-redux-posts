@@ -150,6 +150,9 @@ This project implements a posts listing application with a focus on clean archit
    - Page re-renders with new data while maintaining scroll position
    - When scrolling to the bottom of the page more posts are automatically fetched
    - if now more posts are available according to the total returned from the api, no more requests are made
+     - Redux toolkit query (RTK) provides a infinity query functionality that is used here
+     - [useGetInfinitePostsInfiniteQuery](lib/features/posts/postsApiSlice.ts) in used inside the hook `[useLoadInfinitePosts](lib/hooks/useLoadInfinitePosts.ts), which uses intersection observer to trigger the function to fetch another page and thus perform pagination correctly
+     - the returned data from the pages is flatten, so the consumer gets a list of posts that keeps incrementing while we fetch more items on scroll
 
 5. **Error Handling**
    - API errors are caught and displayed user-friendly messages
