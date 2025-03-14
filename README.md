@@ -139,7 +139,7 @@ This project implements a posts listing application with a focus on clean archit
 3. **Adding New Posts**
 
    - New posts can be created in two ways:
-     1. Using the "Create Post" button located above the posts list
+     1. Using the **Add Post** button located above the posts list (opens the form in a drawer)
      2. Navigating to the dedicated `/add-post` page
    - Both methods provide a form with built-in validation for all fields:
    - Form submission process:
@@ -163,8 +163,9 @@ This project implements a posts listing application with a focus on clean archit
    - Page re-renders with new data while maintaining scroll position
    - When scrolling to the bottom of the page more posts are automatically fetched
    - if now more posts are available according to the total returned from the api, no more requests are made
-     - Redux toolkit query (RTK) provides a infinity query functionality that is used here
-     - [useGetInfinitePostsInfiniteQuery](lib/features/posts/postsApiSlice.ts) in used inside the hook `[useLoadInfinitePosts](lib/hooks/useLoadInfinitePosts.ts), which uses intersection observer to trigger the function to fetch another page and thus perform pagination correctly
+     - Redux toolkit query (RTK) provides a infinity query functionality defined here [useGetInfinitePostsInfiniteQuery](lib/features/posts/postsApiSlice.ts)
+     - in the hook [useLoadInfinitePosts](lib/hooks/useLoadInfinitePosts.ts), we use the generated hook for RTK
+     - through an intersection observer we trigger the function to fetch another page when the user reaches the bottom of the list
      - the returned data from the pages is flatten, so the consumer gets a list of posts that keeps incrementing while we fetch more items on scroll
 
 6. **Error Handling**
