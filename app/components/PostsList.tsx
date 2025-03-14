@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import { AddPostForm } from './AddPostForm';
 import { Drawer } from './Drawer';
 import { Post } from './Post';
+import { Spinner } from './Spinner';
 
 type PostsProps = {
   initialData: PostsWithAuthorResponse;
@@ -68,7 +69,12 @@ export const PostsList = ({ initialData }: PostsProps) => {
         ))}
       </List>
       {error && <div>{error.message}</div>}
-      {isFetching && <LoadingText>Loading more posts...</LoadingText>}
+      {isFetching && (
+        <LoadingText>
+          <Spinner />
+          <span>Loading more posts...</span>
+        </LoadingText>
+      )}
       {attachLoadAnchor && <LoadingAnchor ref={ref} />}
     </>
   );
