@@ -36,7 +36,7 @@ const PostWrapper = styled.article`
   }
 
   &.highlighted {
-    box-shadow: 0 0 2rem ${({ theme }) => theme.colors.neonBlue};
+    box-shadow: 0 0 3rem ${({ theme }) => theme.colors.neonBlue};
     animation: ${fadeInAndOut} 3.5s ease-in-out forwards;
 
     &:hover {
