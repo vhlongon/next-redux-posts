@@ -20,21 +20,6 @@ export async function generateStaticParams() {
   }));
 }
 
-const getPostFromUrl = (searchParams: Awaited<SearchParams>) => {
-  const urlData = searchParams.post;
-
-  if (!urlData || typeof urlData !== 'string') {
-    return null;
-  }
-
-  try {
-    return validatePostWithAuthor(decompressData(urlData));
-  } catch (error) {
-    console.error('Error validating post data:', error);
-    return null;
-  }
-};
-
 export async function generateMetadata({ params }: PostPageProps) {
   const { id } = await params;
 
@@ -43,13 +28,22 @@ export async function generateMetadata({ params }: PostPageProps) {
   };
 }
 const getData = async (searchParams: Awaited<SearchParams>, id: string) => {
+  const urlData = searchParams.post;
+
+  if (urlData && typeof urlData === 'string') {
+    try {
+      return validatePostWithAuthor(decompressData(urlData));
+    } catch (error) {
+      console.error('Error validating post data from url:', error);
+      throw new Error('Failure to validate post data from url');
+    }
+  }
+
   try {
-    const postDataFromUrl = getPostFromUrl(searchParams);
-    const postData = postDataFromUrl ?? (await fetchPost(id));
-    return postData;
+    return await fetchPost(id);
   } catch (error) {
     console.error('Error fetching post data:', error);
-    return null;
+    throw new Error('Failure to fetch post data from api');
   }
 };
 

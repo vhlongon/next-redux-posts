@@ -25,7 +25,7 @@ describe('PostPage', () => {
   });
 
   describe('PostPage', () => {
-    test('renders the post from url search params', async () => {
+    test('renders the post from url search params when data is valid', async () => {
       const postId = '1000';
       const mockedPost = createPostWithAuthorMock({
         id: Number(postId),
@@ -46,7 +46,7 @@ describe('PostPage', () => {
       expect(screen.getByText(mockedPost.body)).toBeInTheDocument();
     });
 
-    test('renders the post from url params', async () => {
+    test('renders the post from url params when data is valid', async () => {
       const params = Promise.resolve({ id: '1' });
       const searchParams = Promise.resolve({});
       render(await PostPage({ params, searchParams }));
@@ -57,9 +57,24 @@ describe('PostPage', () => {
       expect(screen.getByText(mockedPostWithAuthor.body)).toBeInTheDocument();
     });
 
-    test('renders not data message if data in url is invalid and data from api is not available', async () => {
+    test('throws an error if data in url is invalid', async () => {
       vi.spyOn(console, 'error').mockImplementation(() => {});
       const postId = '123';
+      const params = Promise.resolve({ id: postId });
+      const searchParams = Promise.resolve({
+        post: 'invalid'
+      });
+
+      await expect(PostPage({ params, searchParams })).rejects.toThrow(
+        'Failure to validate post data from url'
+      );
+    });
+
+    test('throws an error if data from api is not available', async () => {
+      vi.spyOn(console, 'error').mockImplementation(() => {});
+      const postId = '123';
+      const params = Promise.resolve({ id: postId });
+      const searchParams = Promise.resolve({});
       server.use(
         http.get('https://dummyjson.com/posts/:id', () => {
           return HttpResponse.json({
@@ -67,10 +82,23 @@ describe('PostPage', () => {
           });
         })
       );
+
+      await expect(PostPage({ params, searchParams })).rejects.toThrow(
+        'Failure to fetch post data from api'
+      );
+    });
+
+    test('renders not data message if neither data in url nor data from api is available', async () => {
+      vi.spyOn(console, 'error').mockImplementation(() => {});
+      const postId = '123';
       const params = Promise.resolve({ id: postId });
-      const searchParams = Promise.resolve({
-        post: 'invalid'
-      });
+      const searchParams = Promise.resolve({});
+
+      server.use(
+        http.get('https://dummyjson.com/posts/:id', () => {
+          return new HttpResponse('Not found', { status: 404 });
+        })
+      );
       render(await PostPage({ params, searchParams }));
 
       expect(
@@ -79,8 +107,6 @@ describe('PostPage', () => {
           level: 2
         })
       ).toBeInTheDocument();
-
-      expect(console.error).toHaveBeenCalledWith('Error validating post data:', expect.any(Error));
     });
   });
 });
