@@ -357,3 +357,22 @@ label {
   font-size: var(--font-size-sm);
   color: var(--color-neon-blue);
 }
+
+/* class for the highlighted post to avoid hydration issues */
+.highlighted {
+  box-shadow: 0 0 3rem var(--color-neon-blue);
+  animation: highlight 3.5s ease-in-out forwards;
+
+  &:hover {
+    box-shadow: 0 0 1.5rem var(--color-neon-blue) !important;
+  }
+}
+
+@keyframes highlight {
+  0% {
+    box-shadow: 0 0 2rem var(--color-neon-blue);
+  }
+  50% {
+    box-shadow: 0 0 1rem var(--color-neon-blue);
+  }
+}

@@ -3,25 +3,14 @@
 import type { PostWithAuthor } from '@/lib/features/posts/postTypes';
 import { compressData } from '@/lib/utils/compression';
 import Link from 'next/link';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import Avatar from './Avatar';
 
 type PostProps = PostWithAuthor & {
   preview?: boolean;
   isNew?: boolean;
+  className?: string;
 };
-
-const fadeInAndOut = keyframes`
-  0% {
-    box-shadow: 0 0 2rem ${({ theme }) => theme.colors.neonBlue};
-  }
-  50% {
-    box-shadow: 0 0 1rem ${({ theme }) => theme.colors.neonBlue};
-  }
-  100% {
-    box-shadow: 0 0 0 transparent;
-  }
-`;
 
 const PostWrapper = styled.article`
   padding: ${({ theme }) => theme.spacing.xl};
@@ -33,15 +22,6 @@ const PostWrapper = styled.article`
 
   &:hover {
     box-shadow: 0 0 1.5rem ${({ theme }) => theme.colors.neonBlue};
-  }
-
-  &.highlighted {
-    box-shadow: 0 0 3rem ${({ theme }) => theme.colors.neonBlue};
-    animation: ${fadeInAndOut} 3.5s ease-in-out forwards;
-
-    &:hover {
-      box-shadow: 0 0 1.5rem ${({ theme }) => theme.colors.neonBlue} !important;
-    }
   }
 `;
 
@@ -75,11 +55,12 @@ const FullPostWrapper = styled.div`
 
 export const Post = ({ preview = false, isNew = false, ...post }: PostProps) => {
   const { id, author, title, body } = post;
+  const className = isNew ? 'highlighted' : '';
 
   if (preview) {
     const url = `/post/${id}?post=${compressData(post)}`;
     return (
-      <PostWrapper className={isNew ? 'highlighted' : ''}>
+      <PostWrapper className={className}>
         <PreviewWrapper>
           <Avatar firstName={author.firstName} lastName={author.lastName} size={40} />
           <div>
