@@ -136,14 +136,27 @@ This project implements a posts listing application with a focus on clean archit
    - The post card is populated with the data
    - if no data can't be provided via the url or the call to the external api a friendly message is shown
 
-3. **Data Fetching**
+3. **Adding New Posts**
+
+   - New posts can be created in two ways:
+     1. Using the "Create Post" button located above the posts list
+     2. Navigating to the dedicated `/add-post` page
+   - Both methods provide a form with built-in validation for all fields:
+   - Form submission process:
+     - New post data is sent via WebSocket connection
+     - The app listens for new post events through the WebSocket
+     - When a new post is received, it's automatically added to the top of the posts list
+     - The newly added post is temporarily highlighted for a few seconds for better visibility
+     - This real-time approach ensures all connected users see new posts immediately
+
+4. **Data Fetching**
 
    - Posts are fetched from the external API using typed fetch requests
    - Response data is validated against TypeScript types
    - Error boundaries handle potential API failures
    - Loading states are managed during data fetching
 
-4. **Pagination Flow**
+5. **Pagination Flow**
 
    - Initially 20 posts are show per default, but url parameters can be provided to customize how the fetching works
    - New data is fetched based on updated parameters
@@ -154,7 +167,8 @@ This project implements a posts listing application with a focus on clean archit
      - [useGetInfinitePostsInfiniteQuery](lib/features/posts/postsApiSlice.ts) in used inside the hook `[useLoadInfinitePosts](lib/hooks/useLoadInfinitePosts.ts), which uses intersection observer to trigger the function to fetch another page and thus perform pagination correctly
      - the returned data from the pages is flatten, so the consumer gets a list of posts that keeps incrementing while we fetch more items on scroll
 
-5. **Error Handling**
+6. **Error Handling**
+
    - API errors are caught and displayed user-friendly messages
    - Type validation ensures data consistency
    - Loading states prevent UI issues during data fetches
