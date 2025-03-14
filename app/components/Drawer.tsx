@@ -25,7 +25,7 @@ const DrawerContent = styled.aside<{ $isOpen: boolean }>`
   position: fixed;
   top: 0;
   right: 0;
-  width: 500px;
+  width: 100%;
   padding: ${({ theme }) => theme.spacing.xl};
   height: 100%;
   background-color: ${({ theme }) => theme.colors.surface};
@@ -34,6 +34,10 @@ const DrawerContent = styled.aside<{ $isOpen: boolean }>`
   transition: transform 0.3s ease;
   z-index: 101;
   overflow-y: auto;
+
+  @media (min-width: 768px) {
+    max-width: 500px;
+  }
 `;
 
 const CloseButton = styled.button`
@@ -60,7 +64,6 @@ export const Drawer = ({ isOpen, onClose, children }: DrawerProps) => {
       <DrawerOverlay $isOpen={isOpen} onClick={onClose} aria-hidden={!isOpen} />
       <DrawerContent
         $isOpen={isOpen}
-        hidden={!isOpen}
         data-testid="drawer"
         aria-modal={isOpen}
         aria-hidden={!isOpen}
