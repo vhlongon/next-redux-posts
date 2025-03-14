@@ -9,10 +9,13 @@ import Avatar from './Avatar';
 type PostProps = PostWithAuthor & {
   preview?: boolean;
   isNew?: boolean;
-  className?: string;
 };
 
+export const truncateText = (text: string, maxLength: number) =>
+  text.length > maxLength ? `${text.slice(0, maxLength)}...` : text;
+
 const PostWrapper = styled.article`
+  max-width: 100%;
   padding: ${({ theme }) => theme.spacing.xl};
   border: ${({ theme }) => `${theme.borderWidth.sm} solid ${theme.colors.neonBlue}`};
   border-radius: ${({ theme }) => theme.borderRadius.md};
@@ -25,8 +28,15 @@ const PostWrapper = styled.article`
   }
 `;
 
-export const truncateText = (text: string, maxLength: number) =>
-  text.length > maxLength ? `${text.slice(0, maxLength)}...` : text;
+const TextContent = styled.div`
+  flex-wrap: wrap;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
+  white-space: pre-wrap;
+`;
 
 const AvatarWrapper = styled.div`
   display: flex;
@@ -49,7 +59,7 @@ const TextWrapper = styled.p`
   flex-direction: column;
 `;
 
-const FullPostWrapper = styled.div`
+const FullPostWrapper = styled(TextContent)`
   text-align: center;
 `;
 
@@ -63,14 +73,14 @@ export const Post = ({ preview = false, isNew = false, ...post }: PostProps) => 
       <PostWrapper className={className}>
         <PreviewWrapper>
           <Avatar firstName={author.firstName} lastName={author.lastName} size={40} />
-          <div>
+          <TextContent>
             <span>
               By: {author.firstName} {author.lastName}
             </span>
             <Title>{title}</Title>
             <TextWrapper>{preview ? truncateText(body, 100) : body}</TextWrapper>
             <Link href={url}>Read more</Link>
-          </div>
+          </TextContent>
         </PreviewWrapper>
       </PostWrapper>
     );
