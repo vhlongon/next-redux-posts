@@ -7,7 +7,7 @@ test('renders posts page and load more posts on scroll', async ({ page }) => {
 
   const mainHeading = page.getByRole('heading', {
     name: 'Posts App',
-    level: 1,
+    level: 1
   });
   await expect(mainHeading).toBeVisible();
 

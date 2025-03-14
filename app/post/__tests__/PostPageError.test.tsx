@@ -2,7 +2,7 @@ import { render, screen } from '@/test/utils';
 import PostPageError from '../error';
 
 vi.mock('next/navigation', () => ({
-  useParams: vi.fn().mockReturnValue({ id: '1' }),
+  useParams: vi.fn().mockReturnValue({ id: '1' })
 }));
 
 describe('PostPageError', () => {
@@ -15,7 +15,7 @@ describe('PostPageError', () => {
     ).toBeInTheDocument();
     expect(
       screen.getByText('Error trying to fetch the post for id', {
-        exact: false,
+        exact: false
       })
     ).toBeInTheDocument();
 

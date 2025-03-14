@@ -15,13 +15,13 @@ describe('store', () => {
           reducerPath: 'postsApi',
           refetchOnFocus: false,
           refetchOnMountOrArgChange: false,
-          refetchOnReconnect: false,
+          refetchOnReconnect: false
         },
         mutations: {},
         provided: {},
         queries: {},
-        subscriptions: {},
-      },
+        subscriptions: {}
+      }
     });
 
     expect(store.dispatch).toBeInstanceOf(Function);

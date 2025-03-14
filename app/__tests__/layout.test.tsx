@@ -1,14 +1,14 @@
-import { render, screen } from '@testing-library/react';
 import RootLayout from '@/app/layout';
+import { render, screen } from '@testing-library/react';
 
 // Mock next/font/google to return a mock font object
 vi.mock('next/font/google', () => ({
   Space_Grotesk: () => ({
-    variable: '--font-body',
+    variable: '--font-body'
   }),
   Orbitron: () => ({
-    variable: '--font-heading',
-  }),
+    variable: '--font-heading'
+  })
 }));
 
 describe('RootLayout', () => {
@@ -38,7 +38,7 @@ describe('RootLayout', () => {
       width: '100%',
       flex: 1,
       display: 'flex',
-      justifyContent: 'center',
+      justifyContent: 'center'
     });
   });
 });

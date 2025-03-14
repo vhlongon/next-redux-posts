@@ -25,8 +25,7 @@ const fadeInAndOut = keyframes`
 
 const PostWrapper = styled.article`
   padding: ${({ theme }) => theme.spacing.xl};
-  border: ${({ theme }) =>
-    `${theme.borderWidth.sm} solid ${theme.colors.neonBlue}`};
+  border: ${({ theme }) => `${theme.borderWidth.sm} solid ${theme.colors.neonBlue}`};
   border-radius: ${({ theme }) => theme.borderRadius.md};
   overflow: hidden;
   background-color: ${({ theme }) => theme.colors.surface};
@@ -74,11 +73,7 @@ const FullPostWrapper = styled.div`
   text-align: center;
 `;
 
-export const Post = ({
-  preview = false,
-  isNew = false,
-  ...post
-}: PostProps) => {
+export const Post = ({ preview = false, isNew = false, ...post }: PostProps) => {
   const { id, author, title, body } = post;
 
   if (preview) {
@@ -86,19 +81,13 @@ export const Post = ({
     return (
       <PostWrapper className={isNew ? 'highlighted' : ''}>
         <PreviewWrapper>
-          <Avatar
-            firstName={author.firstName}
-            lastName={author.lastName}
-            size={40}
-          />
+          <Avatar firstName={author.firstName} lastName={author.lastName} size={40} />
           <div>
             <span>
               By: {author.firstName} {author.lastName}
             </span>
             <Title>{title}</Title>
-            <TextWrapper>
-              {preview ? truncateText(body, 100) : body}
-            </TextWrapper>
+            <TextWrapper>{preview ? truncateText(body, 100) : body}</TextWrapper>
             <Link href={url}>Read more</Link>
           </div>
         </PreviewWrapper>
@@ -110,11 +99,7 @@ export const Post = ({
     <PostWrapper className={isNew ? 'highlighted' : ''}>
       <FullPostWrapper>
         <AvatarWrapper>
-          <Avatar
-            firstName={author.firstName}
-            lastName={author.lastName}
-            size={80}
-          />
+          <Avatar firstName={author.firstName} lastName={author.lastName} size={80} />
         </AvatarWrapper>
         <TextWrapper>
           By: {author.firstName} {author.lastName}

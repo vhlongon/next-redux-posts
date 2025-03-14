@@ -1,5 +1,6 @@
 import { StoreProvider } from '@/app/Providers/StoreProvider';
 import { ThemeProvider } from '@/app/Providers/ThemeProvider';
+// biome-ignore lint/style/noNamespaceImport: <explanation>
 import * as testingLibrary from '@testing-library/react';
 import type { ReactNode } from 'react';
 
@@ -34,5 +35,5 @@ export const {
   // waitFor,
   // waitForElementToBeRemoved,
   // within,
-  screen,
+  screen
 } = reactTestingLibraryUtils;

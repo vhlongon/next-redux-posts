@@ -10,7 +10,9 @@
     "test:e2e": "playwright test",
     "typecheck": "tsc  --noEmit --project tsconfig.quality.json",
     "knip": "knip",
-    "quality": "npm run typecheck && npm run knip"
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "quality": "npm run typecheck && npm run knip && npm run lint"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.0",
@@ -26,6 +28,7 @@
     "zod": "^3.24.2"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.9.4",
     "@playwright/test": "^1.51.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",

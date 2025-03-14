@@ -6,9 +6,7 @@ describe('Avatar', () => {
     render(<Avatar firstName="John" lastName="Doe" />);
 
     expect(screen.getByText('JD')).toBeInTheDocument();
-    expect(
-      screen.getByRole('img', { name: 'Avatar for John Doe' })
-    ).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: 'Avatar for John Doe' })).toBeInTheDocument();
   });
 
   describe('getInitials', () => {

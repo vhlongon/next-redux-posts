@@ -4,7 +4,7 @@ import { server } from './test/mocks/node';
 
 beforeAll(() => {
   server.listen({
-    onUnhandledRequest: 'warn',
+    onUnhandledRequest: 'warn'
   });
 });
 

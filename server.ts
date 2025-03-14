@@ -1,24 +1,17 @@
 import { parse } from 'node:url';
-import {
-  createServer,
-  Server,
-  IncomingMessage,
-  ServerResponse,
-} from 'node:http';
+import { createServer, type Server, type IncomingMessage, type ServerResponse } from 'node:http';
 import next from 'next';
 import { WebSocket, WebSocketServer } from 'ws';
-import { Socket } from 'node:net';
+import type { Socket } from 'node:net';
 
 const nextApp = next({ dev: process.env.NODE_ENV !== 'production' });
 const handle = nextApp.getRequestHandler();
 const clients: Set<WebSocket> = new Set();
 
 nextApp.prepare().then(() => {
-  const server: Server = createServer(
-    (req: IncomingMessage, res: ServerResponse) => {
-      handle(req, res, parse(req.url || '', true));
-    }
-  );
+  const server: Server = createServer((req: IncomingMessage, res: ServerResponse) => {
+    handle(req, res, parse(req.url || '', true));
+  });
 
   const wss = new WebSocketServer({ noServer: true });
 
@@ -28,14 +21,11 @@ nextApp.prepare().then(() => {
 
     ws.on('message', (message: Buffer, isBinary: boolean) => {
       console.log(`Message received: ${message}`);
-      clients.forEach(client => {
-        if (
-          client.readyState === WebSocket.OPEN &&
-          message.toString() !== `{"event":"ping"}`
-        ) {
+      for (const client of clients) {
+        if (client.readyState === WebSocket.OPEN && message.toString() !== `{"event":"ping"}`) {
           client.send(message, { binary: isBinary });
         }
-      });
+      }
     });
 
     ws.on('close', () => {
@@ -52,7 +42,7 @@ nextApp.prepare().then(() => {
     }
 
     if (pathname === '/api/ws') {
-      wss.handleUpgrade(req, socket, head, ws => {
+      wss.handleUpgrade(req, socket, head, (ws) => {
         wss.emit('connection', ws, req);
       });
     }

@@ -19,7 +19,7 @@ const Avatar = ({
   lastName,
   size = 40,
   backgroundColor = cyberpunkTheme.colors.neonBlue,
-  textColor = cyberpunkTheme.colors.textPrimary,
+  textColor = cyberpunkTheme.colors.textPrimary
 }: AvatarProps) => {
   const initials = getInitials(firstName, lastName);
 
@@ -31,14 +31,13 @@ const Avatar = ({
         width: `${size}px`,
         height: `${size}px`,
         backgroundColor,
-        clipPath:
-          'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)',
+        clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         color: textColor,
         fontSize: `${size * 0.4}px`,
-        fontWeight: 'bold',
+        fontWeight: 'bold'
       }}
     >
       {initials}

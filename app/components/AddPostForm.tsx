@@ -29,7 +29,7 @@ const ButtonWrapper = styled.div`
 `;
 
 export const AddPostForm = () => {
-  const sendMessage: FormEventHandler<HTMLFormElement> = e => {
+  const sendMessage: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     const ws = getClient();
 
@@ -43,8 +43,8 @@ export const AddPostForm = () => {
       author: {
         id: 1,
         firstName: post.firstName,
-        lastName: post.lastName,
-      },
+        lastName: post.lastName
+      }
     };
 
     const payload = validatePostWithAuthor(postWithAuthor);
@@ -55,7 +55,7 @@ export const AddPostForm = () => {
       ws.close();
     };
 
-    ws.onerror = error => {
+    ws.onerror = (error) => {
       console.error('WebSocket error:', error);
     };
   };
@@ -72,21 +72,11 @@ export const AddPostForm = () => {
       </InputWrapper>
       <InputWrapper>
         <label htmlFor="firstName">First Name:</label>
-        <input
-          type="text"
-          id="firstName"
-          name="firstName"
-          placeholder="First Name"
-        />
+        <input type="text" id="firstName" name="firstName" placeholder="First Name" />
       </InputWrapper>
       <InputWrapper>
         <label htmlFor="lastName">Last Name:</label>
-        <input
-          type="text"
-          id="lastName"
-          name="lastName"
-          placeholder="Last Name"
-        />
+        <input type="text" id="lastName" name="lastName" placeholder="Last Name" />
       </InputWrapper>
       <ButtonWrapper>
         <Button type="submit">Add Post</Button>

@@ -1,6 +1,6 @@
 import { render, screen } from '@/test/utils';
-import { Drawer } from '../Drawer';
 import userEvent from '@testing-library/user-event';
+import { Drawer } from '../Drawer';
 describe('Drawer', () => {
   test('should render content when open', () => {
     const onClose = vi.fn();

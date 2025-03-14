@@ -1,9 +1,7 @@
 'use client';
 
-import {
-  ThemeProvider as StyledThemeProvider,
-  type DefaultTheme,
-} from 'styled-components';
+import type { ReactNode } from 'react';
+import { type DefaultTheme, ThemeProvider as StyledThemeProvider } from 'styled-components';
 
 /**
  * @description Cyberpunk theme
@@ -12,7 +10,7 @@ import {
 export const cyberpunkTheme: DefaultTheme = {
   fonts: {
     heading: 'var(--font-heading)',
-    body: 'var(--font-body)',
+    body: 'var(--font-body)'
   },
   fontSizes: {
     xs: 'var(--font-size-xs)',
@@ -20,18 +18,18 @@ export const cyberpunkTheme: DefaultTheme = {
     base: 'var(--font-size-base)',
     lg: 'var(--font-size-lg)',
     xl: 'var(--font-size-xl)',
-    xxl: 'var(--font-size-xxl)',
+    xxl: 'var(--font-size-xxl)'
   },
   borderRadius: {
     sm: 'var(--border-radius-sm)',
     md: 'var(--border-radius-md)',
     lg: 'var(--border-radius-lg)',
-    pill: 'var(--border-radius-pill)',
+    pill: 'var(--border-radius-pill)'
   },
   borderWidth: {
     sm: 'var(--border-width-sm)',
     md: 'var(--border-width-md)',
-    lg: 'var(--border-width-lg)',
+    lg: 'var(--border-width-lg)'
   },
   spacing: {
     xs: 'var(--spacing-xs)',
@@ -40,7 +38,7 @@ export const cyberpunkTheme: DefaultTheme = {
     lg: 'var(--spacing-lg)',
     xl: 'var(--spacing-xl)',
     xxl: 'var(--spacing-xxl)',
-    xxxl: 'var(--spacing-xxxl)',
+    xxxl: 'var(--spacing-xxxl)'
   },
   colors: {
     // Base colors
@@ -59,16 +57,14 @@ export const cyberpunkTheme: DefaultTheme = {
 
     // Gradient combinations
     gradientPinkBlue: 'var(--gradient-pink-blue)',
-    gradientPurpleGreen: 'var(--gradient-purple-green)',
+    gradientPurpleGreen: 'var(--gradient-purple-green)'
   },
   transition: {
     default: 'var(--transition-default)',
-    fast: 'var(--transition-fast)',
-  },
+    fast: 'var(--transition-fast)'
+  }
 };
 
-export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
-  return (
-    <StyledThemeProvider theme={cyberpunkTheme}>{children}</StyledThemeProvider>
-  );
+export const ThemeProvider = ({ children }: { children: ReactNode }) => {
+  return <StyledThemeProvider theme={cyberpunkTheme}>{children}</StyledThemeProvider>;
 };

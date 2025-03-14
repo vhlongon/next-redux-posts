@@ -2,11 +2,11 @@
 
 import type { PostsWithAuthorResponse } from '@/lib/features/posts/postTypes';
 import { useLoadInfinitePosts } from '@/lib/hooks/useLoadInfinitePosts';
-import { Post } from './Post';
-import styled from 'styled-components';
 import { useState } from 'react';
-import { Drawer } from './Drawer';
+import styled from 'styled-components';
 import { AddPostForm } from './AddPostForm';
+import { Drawer } from './Drawer';
+import { Post } from './Post';
 
 type PostsProps = {
   initialData: PostsWithAuthorResponse;
@@ -46,9 +46,8 @@ const ListItem = styled.li`
 `;
 
 export const PostsList = ({ initialData }: PostsProps) => {
-  const { posts, ref, error, isFetching, isLoading } =
-    useLoadInfinitePosts(initialData);
-  const attachLoadAnchor = !isLoading && !isFetching;
+  const { posts, ref, error, isFetching, isLoading } = useLoadInfinitePosts(initialData);
+  const attachLoadAnchor = !(isLoading || isFetching);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const handleOpenDrawer = () => setIsDrawerOpen(true);
@@ -62,7 +61,7 @@ export const PostsList = ({ initialData }: PostsProps) => {
         <AddPostForm />
       </Drawer>
       <List data-testid="posts-list">
-        {posts?.map(post => (
+        {posts?.map((post) => (
           <ListItem key={`post-${post.id}`}>
             <Post {...post} preview />
           </ListItem>

@@ -1,6 +1,6 @@
 import { render, screen } from '@/test/utils';
-import { AddPostForm } from '../AddPostForm';
 import userEvent from '@testing-library/user-event';
+import { AddPostForm } from '../AddPostForm';
 describe('AddPostForm', () => {
   test('should render correctly', async () => {
     const consoleSpy = vi.spyOn(console, 'info');

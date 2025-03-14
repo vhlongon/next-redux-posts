@@ -11,7 +11,7 @@ describe('postsApi', () => {
         posts: [post],
         total: 1,
         skip: 0,
-        limit: 1,
+        limit: 1
       };
       server.use(
         http.get('https://dummyjson.com/posts', () => {

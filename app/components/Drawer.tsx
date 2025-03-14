@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
-import styled from 'styled-components';
 import { useEffect } from 'react';
+import styled from 'styled-components';
 
 type DrawerProps = {
   isOpen: boolean;

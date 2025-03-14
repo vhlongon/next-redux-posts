@@ -3,7 +3,7 @@ import type {
   AuthorSchema,
   PostSchema,
   PostWithAuthorSchema,
-  PostsWithAuthorSchema,
+  PostsWithAuthorSchema
 } from './postsValidation';
 
 export type Post = z.infer<typeof PostSchema>;

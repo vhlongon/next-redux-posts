@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect } from 'react';
 import { useParams } from 'next/navigation';
+import { useEffect } from 'react';
 
 type ErrorProps = {
   error: Error & {

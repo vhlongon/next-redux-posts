@@ -4,16 +4,16 @@ import { render, screen } from '@/test/utils';
 import { PostsList } from '../PostsList';
 
 describe('PostsList', () => {
-  const postsWithAuthor = mockedPosts.map(post => ({
+  const postsWithAuthor = mockedPosts.map((post) => ({
     ...post,
-    author: mockedUser,
+    author: mockedUser
   }));
 
   const initialData: PostsWithAuthorResponse = {
     posts: postsWithAuthor,
     total: postsWithAuthor.length,
     limit: postsWithAuthor.length,
-    skip: 0,
+    skip: 0
   };
 
   test('should render correctly with initial data', () => {

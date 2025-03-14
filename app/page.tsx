@@ -21,7 +21,7 @@ export default async function PostsPage({ searchParams }: PostsPageProps) {
       style={{
         padding: 'var(--spacing-xl)',
         maxWidth: '1000px',
-        margin: '0 auto',
+        margin: '0 auto'
       }}
     >
       <h2 style={{ textAlign: 'center' }}>Posts</h2>
@@ -30,7 +30,7 @@ export default async function PostsPage({ searchParams }: PostsPageProps) {
           limit,
           posts,
           skip,
-          total,
+          total
         }}
       />
     </div>
@@ -38,5 +38,5 @@ export default async function PostsPage({ searchParams }: PostsPageProps) {
 }
 
 export const metadata: Metadata = {
-  title: 'Redux Toolkit posts',
+  title: 'Redux Toolkit posts'
 };

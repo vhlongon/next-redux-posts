@@ -1,0 +1,84 @@
+{
+  "$schema": "https://biomejs.dev/schemas/1.5.2/schema.json",
+  "organizeImports": {
+    "enabled": true,
+    "include": ["app"]
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "correctness": {
+        "all": true,
+        "useImportExtensions": "off",
+        "noNodejsModules": "off"
+      },
+      "complexity": {
+        "all": true
+      },
+      "nursery": {
+        "all": true,
+        "useImportRestrictions": "off",
+        "useExplicitType": "off",
+        "noCommonJs": "off",
+        "noProcessEnv": "off",
+        "useComponentExportOnlyModules": "off",
+        "noSecrets": "off"
+      },
+      "suspicious": {
+        "all": true,
+        "noReactSpecificProps": "off",
+        "noConsoleLog": "off",
+        "noConsole": "off"
+      },
+      "performance": {
+        "all": true,
+        "useTopLevelRegex": "off"
+      },
+      "style": {
+        "all": true,
+        "noImplicitBoolean": "off",
+        "noDefaultExport": "off",
+        "useNamingConvention": "off",
+        "useBlockStatements": "error",
+        "useFilenamingConvention": "off"
+      }
+    },
+    "ignore": ["*.test.tsx", "*.test.ts", "coverage", "test.setup.ts"]
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 100,
+    "ignore": [
+      "node_modules",
+      "build",
+      "public",
+      ".cache",
+      "cdk.out",
+      "coverage",
+      "./app/api/__generated__"
+    ],
+    "formatWithErrors": true
+  },
+  "css": {
+    "formatter": {
+      "enabled": true,
+      "quoteStyle": "single",
+      "indentStyle": "space",
+      "indentWidth": 2,
+      "lineWidth": 100
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "enabled": true,
+      "quoteStyle": "single",
+      "trailingCommas": "none"
+    }
+  },
+  "files": {
+    "ignore": [".next/**", "playwright-report/**"]
+  }
+}

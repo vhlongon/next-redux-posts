@@ -1,10 +1,6 @@
 import { compressData } from '@/lib/utils/compression';
 import { server } from '@/test/mocks/node';
-import {
-  createPostWithAuthorMock,
-  mockedPostWithAuthor,
-  mockedPosts,
-} from '@/test/mocks/postMock';
+import { createPostWithAuthorMock, mockedPostWithAuthor, mockedPosts } from '@/test/mocks/postMock';
 import { render, screen } from '@/test/utils';
 import { http, HttpResponse } from 'msw';
 import PostPage, { generateStaticParams } from '../[id]/page';
@@ -12,8 +8,8 @@ import PostPage, { generateStaticParams } from '../[id]/page';
 describe('PostPage', () => {
   test('generates static params', async () => {
     const params = await generateStaticParams();
-    const generatedParams = mockedPosts.map(post => ({
-      id: String(post.id),
+    const generatedParams = mockedPosts.map((post) => ({
+      id: String(post.id)
     }));
     expect(params).toEqual(generatedParams);
   });
@@ -23,17 +19,15 @@ describe('PostPage', () => {
     const mockedPost = createPostWithAuthorMock({
       id: Number(postId),
       title: 'My mocked post',
-      body: 'My mocked post body',
+      body: 'My mocked post body'
     });
     const params = Promise.resolve({ id: postId });
     const searchParams = Promise.resolve({
-      post: compressData(mockedPost),
+      post: compressData(mockedPost)
     });
     render(await PostPage({ params, searchParams }));
 
-    expect(
-      screen.getByRole('heading', { name: `Post: ${postId}`, level: 2 })
-    ).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: `Post: ${postId}`, level: 2 })).toBeInTheDocument();
 
     expect(screen.getByText(mockedPost.title)).toBeInTheDocument();
     expect(screen.getByText(mockedPost.body)).toBeInTheDocument();
@@ -44,9 +38,7 @@ describe('PostPage', () => {
     const searchParams = Promise.resolve({});
     render(await PostPage({ params, searchParams }));
 
-    expect(
-      screen.getByRole('heading', { name: 'Post: 1', level: 2 })
-    ).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Post: 1', level: 2 })).toBeInTheDocument();
 
     expect(screen.getByText(mockedPostWithAuthor.title)).toBeInTheDocument();
     expect(screen.getByText(mockedPostWithAuthor.body)).toBeInTheDocument();
@@ -58,26 +50,23 @@ describe('PostPage', () => {
     server.use(
       http.get('https://dummyjson.com/posts/:id', () => {
         return HttpResponse.json({
-          error: 'Not found',
+          error: 'Not found'
         });
       })
     );
     const params = Promise.resolve({ id: postId });
     const searchParams = Promise.resolve({
-      post: 'invalid',
+      post: 'invalid'
     });
     render(await PostPage({ params, searchParams }));
 
     expect(
       screen.getByRole('heading', {
         name: `No data available for post with id ${postId}`,
-        level: 2,
+        level: 2
       })
     ).toBeInTheDocument();
 
-    expect(console.error).toHaveBeenCalledWith(
-      'Error validating post data:',
-      expect.any(Error)
-    );
+    expect(console.error).toHaveBeenCalledWith('Error validating post data:', expect.any(Error));
   });
 });
