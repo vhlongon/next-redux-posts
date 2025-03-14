@@ -375,4 +375,7 @@ label {
   50% {
     box-shadow: 0 0 1rem var(--color-neon-blue);
   }
+  100% {
+    box-shadow: 0 0 0 transparent;
+  }
 }
