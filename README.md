@@ -81,7 +81,6 @@ pnpm lint:fix
 - [MSW](https://mswjs.io/) for API mocking
 - [Testing Library](https://testing-library.com/) for component testing
 - [Biome](https://biomejs.dev/) for linting, formatting, and code quality
-- Custom TypeScript configurations for different environments
 - [Knip](https://knip.dev/) for detecting unused files, exports, and dependencies
 
 ## 📝 Notes
@@ -90,12 +89,70 @@ pnpm lint:fix
 - Includes separate TypeScript configurations for development and quality checks
 - Comprehensive testing setup with both unit and E2E tests
 
-## 🔒 Security
-
-- Private package (not published to npm)
-- Environment-specific configurations
-- Type-safe API calls with [Zod](https://zod.dev/) validation
-
 ## 📦 Dependencies
 
-All dependencies are managed through [pnpm](https://pnpm.io/) for faster, more efficient package management. Key dependencies are kept up to date with the latest stable versions.
+All dependencies are managed through [pnpm](https://pnpm.io/) for faster, more efficient package management.
+
+## Architecture and Design Decisions
+
+### Overview
+
+This project implements a posts listing application with a focus on clean architecture, type safety, and testability. Here's a breakdown of the key architectural decisions and flow:
+
+### Application Flow
+
+1. **Data Flow**
+
+   - The application fetches posts data from an external API
+   - Data is validated and typed using TypeScript and Zod for complete type safety
+   - Server-side rendering is utilized for better performance and SEO
+
+2. **Component Structure**
+
+   - Pages are built using Next.js App Router
+   - Components are organized by feature/domain
+   - Shared components are placed in a common directory for reusability
+
+3. **Testing Strategy**
+   - Unit tests for individual components
+   - Integration tests for page-level functionality
+   - Mocked data for consistent test scenarios
+   - React Testing Library for behavior-driven tests
+   - Playwright for end-to-end testing across multiple browsers
+   - End-to-end test coverage for critical user flows
+
+### How it Works
+
+1. **Initial Page Load**
+
+   - When a user visits the posts page, Next.js triggers server-side rendering
+   - Server component fetches the initial posts data
+   - The page is rendered with the fetched data and sent to the client
+   - On the client side that initial data is feed into redux for easier state management
+
+2. **On post specific page**
+
+   - Post data is either fetched from the data encoded in the url or fetched server side via the id
+   - The post card is populated with the data
+   - if no data can't be provided via the url or the call to the external api a friendly message is shown
+
+3. **Data Fetching**
+
+   - Posts are fetched from the external API using typed fetch requests
+   - Response data is validated against TypeScript types
+   - Error boundaries handle potential API failures
+   - Loading states are managed during data fetching
+
+4. **Pagination Flow**
+
+   - Initially 20 posts are show per default, but url parameters can be provided to customize how the fetching works
+   - New data is fetched based on updated parameters
+   - Page re-renders with new data while maintaining scroll position
+   - When scrolling to the bottom of the page more posts are automatically fetched
+   - if now more posts are available according to the total returned from the api, no more requests are made
+
+5. **Error Handling**
+   - API errors are caught and displayed user-friendly messages
+   - Type validation ensures data consistency
+   - Loading states prevent UI issues during data fetches
+   - Fallback UI for edge cases
