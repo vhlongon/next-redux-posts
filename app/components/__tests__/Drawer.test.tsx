@@ -11,7 +11,7 @@ describe('Drawer', () => {
       </Drawer>
     );
 
-    expect(screen.getByTestId('drawer')).toBeVisible();
+    expect(screen.getByTestId('drawer')).toHaveAttribute('aria-hidden', 'false');
   });
 
   test('should not render content when closed', () => {
@@ -23,7 +23,7 @@ describe('Drawer', () => {
       </Drawer>
     );
 
-    expect(screen.queryByTestId('drawer')).not.toBeVisible();
+    expect(screen.queryByTestId('drawer')).toHaveAttribute('aria-hidden', 'true');
   });
 
   test('should call onClose when close button is clicked', async () => {
