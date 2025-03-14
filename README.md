@@ -56,6 +56,12 @@ pnpm quality
 
 # Check for unused exports and dependencies
 pnpm knip
+
+# Run Biome checks
+pnpm lint
+
+# Fix Biome issues
+pnpm lint:fix
 ```
 
 ## 🔍 Key Features
@@ -74,6 +80,7 @@ pnpm knip
 - [Playwright](https://playwright.dev/) for E2E testing
 - [MSW](https://mswjs.io/) for API mocking
 - [Testing Library](https://testing-library.com/) for component testing
+- [Biome](https://biomejs.dev/) for linting, formatting, and code quality
 - Custom TypeScript configurations for different environments
 - [Knip](https://knip.dev/) for detecting unused files, exports, and dependencies
 
