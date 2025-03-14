@@ -39,7 +39,7 @@ export default function Loading() {
               listStyle: 'none'
             }}
           >
-            <PostSkeleton />
+            <PostSkeleton preview />
           </li>
         ))}
       </ul>

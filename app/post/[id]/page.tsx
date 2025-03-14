@@ -52,7 +52,7 @@ export default async function PostPage({ params, searchParams }: PostPageProps) 
   const postData = await getData(await searchParams, id);
 
   return (
-    <div style={{ padding: 'var(--spacing-xl)' }}>
+    <div style={{ padding: 'var(--spacing-xl)', maxWidth: '936px', margin: '0 auto' }}>
       {postData ? (
         <>
           <h2 style={{ textAlign: 'center' }}>Post: {id}</h2>
