@@ -23,7 +23,7 @@ const fadeInAndOut = keyframes`
   }
 `;
 
-export const PostWrapper = styled.article`
+const PostWrapper = styled.article`
   padding: ${({ theme }) => theme.spacing.xl};
   border: ${({ theme }) =>
     `${theme.borderWidth.sm} solid ${theme.colors.neonBlue}`};

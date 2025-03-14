@@ -26,7 +26,7 @@ export const PostsWithAuthorSchema = z.object({
   limit: z.number(),
 });
 
-export const PostsSchema = z.object({
+const PostsSchema = z.object({
   posts: z.array(PostSchema),
   total: z.number(),
   skip: z.number(),

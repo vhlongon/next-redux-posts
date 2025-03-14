@@ -5,6 +5,9 @@ const rootReducer = combineSlices({
   [postsApiSlice.reducerPath]: postsApiSlice.reducer,
 });
 
+/**
+ * @public
+ */
 export type RootState = ReturnType<typeof rootReducer>;
 
 export const makeStore = () => {
@@ -17,4 +20,5 @@ export const makeStore = () => {
 };
 
 export type AppStore = ReturnType<typeof makeStore>;
-export type AppDispatch = AppStore['dispatch'];
+// Also available:
+// export type AppDispatch = AppStore['dispatch'];

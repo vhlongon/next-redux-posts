@@ -10,7 +10,7 @@ export const mockedUser: Author = {
   lastName: 'Doe',
 };
 
-export const mockedPost: Post = {
+const mockedPost: Post = {
   id: 1,
   title: 'Test Post',
   body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
@@ -38,7 +38,7 @@ export const createPostWithAuthorMock = (
   };
 };
 
-export const createPostMock = (post?: Partial<Post>): Post => {
+const createPostMock = (post?: Partial<Post>): Post => {
   const { ...defaultPostProps } = mockedPost;
   const { ...postProps } = post ?? {};
   return {

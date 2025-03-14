@@ -40,7 +40,7 @@ const LoadingAnchor = styled.div`
   padding: ${({ theme }) => theme.spacing.xl};
 `;
 
-export const ListItem = styled.li`
+const ListItem = styled.li`
   padding-bottom: ${({ theme }) => theme.spacing.base};
   list-style: none;
 `;
