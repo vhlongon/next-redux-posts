@@ -13,6 +13,10 @@ type PostsProps = {
   initialData: PostsWithAuthorResponse;
 };
 
+const PostTitle = styled.h2`
+  text-align: center;
+`;
+
 const AddPostButton = styled.button`
   margin-bottom: ${({ theme }) => theme.spacing.lg};
   display: flex;
@@ -58,7 +62,7 @@ export const PostsList = ({ initialData }: PostsProps) => {
     <>
       <AddPostButton onClick={handleOpenDrawer}>Add new</AddPostButton>
       <Drawer isOpen={isDrawerOpen} onClose={handleCloseDrawer}>
-        <h2 style={{ textAlign: 'center' }}>Create New Post</h2>
+        <PostTitle>Create New Post</PostTitle>
         <AddPostForm onSubmit={handleCloseDrawer} />
       </Drawer>
       <List data-testid="posts-list">

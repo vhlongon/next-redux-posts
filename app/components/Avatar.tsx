@@ -1,3 +1,4 @@
+import styled from 'styled-components';
 import { cyberpunkTheme } from '../Providers/ThemeProvider';
 
 type AvatarProps = {
@@ -14,6 +15,19 @@ export const getInitials = (firstName: string, lastName: string): string => {
   return `${firstInitial}${lastInitial}`;
 };
 
+const AvatarWrapper = styled.div<{ $textColor: string; size: number; $backgroundColor: string }>`
+  background-color: ${({ $backgroundColor }) => $backgroundColor};
+  width: ${({ size }) => `${size}px`};
+  height: ${({ size }) => `${size}px`};
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: ${({ $textColor }) => $textColor};
+  font-size: ${({ size }) => `${size * 0.4}px`};
+  font-weight: bold;
+`;
+
 const Avatar = ({
   firstName,
   lastName,
@@ -24,24 +38,15 @@ const Avatar = ({
   const initials = getInitials(firstName, lastName);
 
   return (
-    <div
+    <AvatarWrapper
       role="img"
       aria-label={`Avatar for ${firstName} ${lastName}`}
-      style={{
-        width: `${size}px`,
-        height: `${size}px`,
-        backgroundColor,
-        clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        color: textColor,
-        fontSize: `${size * 0.4}px`,
-        fontWeight: 'bold'
-      }}
+      $textColor={textColor}
+      size={size}
+      $backgroundColor={backgroundColor}
     >
       {initials}
-    </div>
+    </AvatarWrapper>
   );
 };
 
