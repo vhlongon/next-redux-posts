@@ -64,11 +64,27 @@ export const AddPostForm = () => {
     <Form onSubmit={sendMessage} aria-label="Add Post Form">
       <InputWrapper>
         <label htmlFor="title">Title:</label>
-        <input required type="text" id="title" name="title" placeholder="Title" maxLength={75} />
+        <input
+          required
+          type="text"
+          id="title"
+          name="title"
+          placeholder="Title"
+          maxLength={75}
+          minLength={10}
+        />
       </InputWrapper>
       <InputWrapper>
         <label htmlFor="body">Body:</label>
-        <textarea required id="body" rows={10} name="body" placeholder="Body" maxLength={1000} />
+        <textarea
+          required
+          id="body"
+          rows={10}
+          name="body"
+          placeholder="Body"
+          maxLength={1000}
+          minLength={25}
+        />
       </InputWrapper>
       <InputWrapper>
         <label htmlFor="firstName">First Name:</label>
@@ -78,7 +94,8 @@ export const AddPostForm = () => {
           id="firstName"
           name="firstName"
           placeholder="First Name"
-          maxLength={50}
+          maxLength={20}
+          minLength={2}
         />
       </InputWrapper>
       <InputWrapper>
@@ -89,7 +106,8 @@ export const AddPostForm = () => {
           id="lastName"
           name="lastName"
           placeholder="Last Name"
-          maxLength={50}
+          maxLength={20}
+          minLength={2}
         />
       </InputWrapper>
       <ButtonWrapper>
