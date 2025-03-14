@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 test('renders posts page and load more posts on scroll', async ({ page }) => {
   await page.goto('http://localhost:3000');
 
-  await expect(page).toHaveTitle(/Redux Toolkit posts/);
+  await expect(page).toHaveTitle(/Redux Toolkit Next.js posts/);
 
   const mainHeading = page.getByRole('heading', {
     name: 'Posts App',

@@ -79,6 +79,6 @@
     }
   },
   "files": {
-    "ignore": [".next/**", "playwright-report/**"]
+    "ignore": [".next/**", "playwright-report/**", "test-results/**"]
   }
 }

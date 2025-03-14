@@ -20,7 +20,10 @@ describe('PostPage', () => {
     test('generates metadata', async () => {
       const params = Promise.resolve({ id: '1' });
       const metadata = await generateMetadata({ params, searchParams: Promise.resolve({}) });
-      expect(metadata).toEqual({ title: 'Post 1' });
+      expect(metadata).toEqual({
+        title: 'Post 1',
+        description: 'Post 1 by John Doe'
+      });
     });
   });
 

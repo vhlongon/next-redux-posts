@@ -79,7 +79,7 @@ export const Post = ({ preview = false, isNew = false, ...post }: PostProps) => 
             </span>
             <Title>{title}</Title>
             <TextWrapper>{preview ? truncateText(body, 100) : body}</TextWrapper>
-            <Link href={url}>Read more</Link>
+            <Link href={url}>See full post</Link>
           </TextContent>
         </PreviewWrapper>
       </PostWrapper>

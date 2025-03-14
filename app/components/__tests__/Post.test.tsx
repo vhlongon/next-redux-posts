@@ -33,7 +33,7 @@ describe('Post', () => {
     expect(screen.getByText(mockedPost.title)).toBeInTheDocument();
     expect(screen.getByText(truncateText(mockedPost.body, 100))).toBeInTheDocument();
 
-    expect(screen.getByRole('link', { name: 'Read more' })).toHaveAttribute(
+    expect(screen.getByRole('link', { name: 'See full post' })).toHaveAttribute(
       'href',
       `/post/${mockedPost.id}?post=${compressData(mockedPost)}`
     );

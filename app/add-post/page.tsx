@@ -11,5 +11,6 @@ export default function AddPostPage() {
 }
 
 export const metadata: Metadata = {
-  title: 'Add Post'
+  title: 'Add Post',
+  description: 'Add a new post to the list'
 };

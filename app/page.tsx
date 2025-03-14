@@ -38,5 +38,6 @@ export default async function PostsPage({ searchParams }: PostsPageProps) {
 }
 
 export const metadata: Metadata = {
-  title: 'Redux Toolkit posts'
+  title: 'Redux Toolkit Next.js posts',
+  description: 'A list of posts created with Redux Toolkit and Next.js'
 };

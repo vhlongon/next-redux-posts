@@ -20,13 +20,6 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: PostPageProps) {
-  const { id } = await params;
-
-  return {
-    title: `Post ${id}`
-  };
-}
 const getData = async (searchParams: Awaited<SearchParams>, id: string) => {
   const urlData = searchParams.post;
 
@@ -46,6 +39,19 @@ const getData = async (searchParams: Awaited<SearchParams>, id: string) => {
     throw new Error('Failure to fetch post data from api');
   }
 };
+
+export async function generateMetadata({ params, searchParams }: PostPageProps) {
+  const { id } = await params;
+
+  const data = await getData(await searchParams, id);
+  const authorFullName = data ? `${data.author.firstName} ${data.author.lastName}` : '';
+  const by = authorFullName ? `by ${authorFullName}` : '';
+
+  return {
+    title: `Post ${id}`,
+    description: `Post ${id} ${by}`
+  };
+}
 
 export default async function PostPage({ params, searchParams }: PostPageProps) {
   const { id } = await params;
