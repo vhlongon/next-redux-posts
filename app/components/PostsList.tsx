@@ -31,7 +31,7 @@ const List = styled.ul`
   padding-left: 0;
 `;
 
-const LoadingText = styled.p`
+const LoadingText = styled.div`
   padding: ${({ theme }) => theme.spacing.xl};
   text-align: center;
 `;
@@ -72,7 +72,7 @@ export const PostsList = ({ initialData }: PostsProps) => {
       {isFetching && (
         <LoadingText>
           <Spinner />
-          <span>Loading more posts...</span>
+          <p>Loading more posts...</p>
         </LoadingText>
       )}
       {attachLoadAnchor && <LoadingAnchor ref={ref} />}
